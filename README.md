@@ -1,6 +1,6 @@
 <b> Стек проекта: </b>
 
-React+JS+Redux Toolkit
+React+TS+Redux Toolkit
 
 <b>Запуск проекта:</b>
 
