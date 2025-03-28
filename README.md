@@ -11,20 +11,20 @@ npm run dev
 <b> Правила работы с репозиторием: </b>
 
 1. Залить изменения ветки main из удаленного репозитория в локальный
-git pull
+   git pull
 
-2. Создать локально ветку под задачу от ветки main (в зависимости от задачи feature, fix, refactor) 
-git branch name
-git checkout name
+2. Создать локально ветку под задачу от ветки main (в зависимости от задачи feature, fix, refactor)
+   git branch name
+   git checkout name
 
 3. Коммиты по задаче проводить в локальную ветку, после завершения задачи произвести слияние main и своей ветки локально
-git add -u
-git commit
-git checkout main
-git merge name
+   git add -u
+   git commit
+   git checkout main
+   git merge name
 
 4. Проверить наличие и залить изменения ветки main из удаленного репозитория в ветку main локального репозитория, после этого выполнить отправку изменений ветки main локального репозитория в ветку main удаленного репозитория
-git pull
-git push
+   git pull
+   git push
 
 5. В случае конфликтов, написать в чат.
