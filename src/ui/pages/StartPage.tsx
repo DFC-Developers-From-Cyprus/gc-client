@@ -1,4 +1,5 @@
 import { ChoiceComponent } from '../components/ChoiceComponent/ChoiceComponent';
+import { ChoicePollComponent } from '../components/ChoicePollComponent/ChoicePollComponent';
 import { ForgotComponent } from '../components/ForgotComponent/ForgotComponent';
 import { LoginComponent } from '../components/LoginComponent/LoginComponent';
 import { RegComponent } from '../components/RegComponent/RegComponent';
@@ -15,6 +16,7 @@ export function StartPage() {
         }}
       />
       <ChoiceComponent title={'Level of pollution'} />
+      <ChoicePollComponent title={'Type of pollution'} />
     </section>
   );
 }
