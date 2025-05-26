@@ -2,11 +2,37 @@
 
 /* 1. Задаём «сырые» CSS-переменные, если нужно */
 :root {
-  --color-primary: #3b82f6;
-  --color-accent: #f43f5e;
+  --color-text: #100408;
+  --color-active: #4f6a35;
+  --color-button: #9a9f17;
+  --color-icons: #b5a49a;
+  --color-link: #757575;
+  --color-hint: #757575;
+  --color-text-light: #d9d9d9;
+  --color-card-bg: #f8f8f8;
+  --color-label-1: #ec9968;
+  --color-label-2: #f1b2b5;
+  --color-bg-primary: #1c179f;
+  --color-bg-footer: #e7ec72;
 
-  --font-sans: 'Inter var', sans-serif;
-  --font-heading: 'Poppins', sans-serif;
+  /* — шрифты и вариации — */
+  --font-body: 'Open Sans', sans-serif;
+  --font-body-cond: 'Open Sans Condensed', sans-serif;
+  --font-heading: 'Yeseva One', serif;
+
+  /* — размеры для типографики — */
+  --size-h1: 24px;
+  --size-h2: 16px;
+  --size-h3: 14px;
+  --size-h4: 14px;
+  --size-s1: 14px;
+  --size-body1: 14px;
+  --size-body2: 14px;
+  --size-body3: 16px;
+  --size-link: 16px;
+  --size-hlinks: 11px;
+  --size-button-txt: 11px;
+  --size-T: 48px;
 }
 
 /* 2. Импортируем всю логику Tailwind CSS */
@@ -16,10 +42,100 @@
       именно эти переменные будут порождать утилиты */
 @theme {
   /* цвета */
-  --color-primary: var(--color-primary);
-  --color-accent: var(--color-accent);
+  --color-text: var(--color-text);
+  --color-active: var(--color-active);
+  --color-button: var(--color-button);
+  --color-icons: var(--color-icons);
+  --color-link: var(--color-link);
+  --color-hint: var(--color-hint);
+  --color-light: var(--color-text-light);
+  --color-card-bg: var(--color-card-bg);
+  --color-label-1: var(--color-label-1);
+  --color-label-2: var(--color-label-2);
+  --color-bg-primary: var(--color-bg-primary);
+  --color-bg-footer: var(--color-bg-footer);
 
-  /* шрифты (будут генерировать .font-sans и .font-heading) */
-  --font-sans: var(--font-sans);
+  /* шрифты */
+  --font-body: var(--font-body);
+  --font-body-cond: var(--font-body-cond);
   --font-heading: var(--font-heading);
+
+  /* размеры (tailwind сгенерирует text-size-h1 … text-size-T) */
+  --size-h1: var(--size-h1);
+  --size-h2: var(--size-h2);
+  --size-h3: var(--size-h3);
+  --size-h4: var(--size-h4);
+  --size-s1: var(--size-s1);
+  --size-body1: var(--size-body1);
+  --size-body2: var(--size-body2);
+  --size-body3: var(--size-body3);
+  --size-link: var(--size-link);
+  --size-hlinks: var(--size-hlinks);
+  --size-button-txt: var(--size-button-txt);
+  --size-T: var(--size-T);
+}
+
+/* 4) Несколько «миксинов» для типографики через @layer components */
+@layer components {
+  .heading-1 {
+    font-family: var(--font-body-cond);
+    font-size: var(--size-h1);
+    font-weight: 600; /* SemiBold */
+    line-height: 1.2;
+  }
+  .heading-2 {
+    font-family: var(--font-body-cond);
+    font-size: var(--size-h2);
+    font-weight: 700; /* Bold */
+  }
+  .heading-3 {
+    font-family: var(--font-body-cond);
+    font-size: var(--size-h3);
+    font-weight: 700;
+  }
+  .heading-4 {
+    font-family: var(--font-body);
+    font-size: var(--size-h4);
+    font-weight: 400;
+  }
+  .subtitle-1 {
+    font-family: var(--font-body-cond);
+    font-size: var(--size-s1);
+    font-weight: 300; /* Light */
+  }
+  .body-1 {
+    font-family: var(--font-body);
+    font-size: var(--size-body1);
+    font-weight: 400;
+  }
+  .body-2 {
+    font-family: var(--font-body);
+    font-size: var(--size-body2);
+    font-weight: 400;
+  }
+  .body-3 {
+    font-family: var(--font-body);
+    font-size: var(--size-body3);
+    font-weight: 600; /* SemiBold */
+  }
+  .link-text {
+    font-family: var(--font-body);
+    font-size: var(--size-link);
+    font-weight: 400;
+  }
+  .header-links {
+    font-family: var(--font-body);
+    font-size: var(--size-hlinks);
+    font-weight: 300;
+  }
+  .btn-text {
+    font-family: var(--font-body);
+    font-size: var(--size-button-txt);
+    font-weight: 300;
+  }
+  .display-T {
+    font-family: var(--font-heading);
+    font-size: var(--size-T);
+    font-weight: 400;
+  }
 }
