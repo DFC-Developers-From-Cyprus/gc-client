@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+// src/ui/components/ForgotComponent/ForgotComponent.tsx
+import React, { useState, useEffect } from 'react';
 import * as Form from '@radix-ui/react-form';
+import { useNavigate } from 'react-router-dom';
 
 import { Button } from '../Button/Button';
 
@@ -10,18 +12,23 @@ interface ForgotComponentProps {
 
 export function ForgotComponent({ onCancel }: ForgotComponentProps) {
   // шаги: 'initial' — ввод email и кнопки Cancel/Reset
-  // 'confirm' — ввод кода и кнопка Submit
-  const [step, setStep] = useState<'initial' | 'confirm'>('initial');
+  // 'success' — уведомление и редирект
+  const [step, setStep] = useState<'initial' | 'success'>('initial');
+  const navigate = useNavigate();
 
-  const handleReset = () => {
-    // переходим к шагу подтверждения
-    setStep('confirm');
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  // При reset password, переходим к шагу успеха
+  const handleReset = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Submit clicked');
+    setStep('success');
   };
+
+  // Редирект через 2 секунды после успеха
+  useEffect(() => {
+    if (step === 'success') {
+      const timer = setTimeout(() => navigate('/'), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [step, navigate]);
 
   return (
     <div className="bg-white rounded-lg shadow p-6 w-full max-w-sm space-y-4">
@@ -64,33 +71,14 @@ export function ForgotComponent({ onCancel }: ForgotComponentProps) {
         </Form.Root>
       )}
 
-      {step === 'confirm' && (
-        <Form.Root onSubmit={handleSubmit} className="space-y-4">
-          {/* Code Entry Field */}
-          <Form.Field name="code">
-            <div className="flex flex-col">
-              <Form.Label className="body-3 mb-1" htmlFor="code"></Form.Label>
-              <Form.Control asChild>
-                <input
-                  id="code"
-                  type="text"
-                  required
-                  placeholder="ENTER CODE"
-                  className="w-full border border-card-bg rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-active"
-                />
-              </Form.Control>
-            </div>
-          </Form.Field>
-
-          {/* Submit Button */}
-          <div className="pt-2">
-            <Button
-              states={[{ label: 'Submit' }, { label: 'Submitting...' }]}
-              type="submit"
-              className="w-full"
-            />
+      {step === 'success' && (
+        <div className="space-y-6 text-center">
+          <h2 className="heading-1 uppercase">Success</h2>
+          <div className="flex justify-center">
+            <img src="/assets/success-icon.svg" alt="Success" className="w-24 h-24" />
           </div>
-        </Form.Root>
+          <p className="body-1">The link was sent to your email.</p>
+        </div>
       )}
     </div>
   );

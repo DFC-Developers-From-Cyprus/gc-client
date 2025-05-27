@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
 import { Header } from '../components/Header/Header';
+import footerImage from '../../../public/assets/images/Footer.svg';
 
 interface LayoutProps {
   children: ReactNode;
@@ -17,9 +18,5 @@ export function Layout({ children }: LayoutProps) {
 }
 
 function Footer() {
-  return (
-    <footer className="w-full bg-bg-footer text-hint text-sm p-4 text-center">
-      © {new Date().getFullYear()} My Company
-    </footer>
-  );
+  return <img src={footerImage} alt="Logo" />;
 }
