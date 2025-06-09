@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import topImage from '../../../public/assets/images/welcomeFrame.png';
 import footerImage from '../../../public/assets/images/Footer.svg';
-import { LoginComponent } from '../components/LoginComponent/LoginComponent';
+import { LoginComponent } from '../auth/LoginComponent/LoginComponent';
 import { Button } from '../components/Button/Button';
 
 export function StartPage() {

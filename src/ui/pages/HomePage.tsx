@@ -1,22 +1,47 @@
+// src/ui/pages/HomePage.tsx
+import { useState } from 'react';
+import * as Form from '@radix-ui/react-form';
 import { Icon } from '@iconify/react';
 
 export function HomePage() {
+  const [search, setSearch] = useState('');
+  const handleClear = () => setSearch('');
+
   return (
-    <section className="flex flex-col items-center justify-center h-full space-y-6 p-4">
-      {/* Hero Heading */}
-      <h2 className="display-T text-active text-center">Добро пожаловать в My App</h2>
-
-      {/* Subtitle */}
-      <p className="body-1 text-center text-light max-w-lg">
-        Это базовая страница HomePage. Здесь вы можете разместить краткое описание приложения,
-        основные функции или призыв к действию.
-      </p>
-
-      {/* Primary Action */}
-      <button className="bg-button hover:bg-button/80 btn-text text-white rounded px-6 py-3 flex items-center space-x-2">
-        <Icon icon="mdi:rocket-launch" width={20} height={20} />
-        <span>Начать</span>
-      </button>
-    </section>
+    <div className="flex flex-col h-screen bg-card-bg">
+      {/* Search input */}
+      <div className="p-4">
+        <Form.Root onSubmit={(e) => e.preventDefault()}>
+          <Form.Field name="search">
+            <Form.Control asChild>
+              <div className="relative border border-gray-200 rounded-lg h-[58px]">
+                <input
+                  type="text"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search"
+                  className="w-full border border-card-bg rounded-lg px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-active h-[58px]"
+                />
+                {search && (
+                  <button
+                    type="button"
+                    onClick={handleClear}
+                    className="absolute inset-y-0 right-3 flex items-center text-icons"
+                  >
+                    <Icon icon="mdi:close" width={16} height={16} />
+                  </button>
+                )}
+              </div>
+            </Form.Control>
+          </Form.Field>
+        </Form.Root>
+      </div>
+      {/* Map placeholder */}
+      <div className="flex-1 p-4">
+        <div className="w-full h-full border-2 border-dashed border-card-bg rounded-lg flex items-center justify-center">
+          <span className="body-1 text-light">Map Placeholder</span>
+        </div>
+      </div>
+    </div>
   );
 }

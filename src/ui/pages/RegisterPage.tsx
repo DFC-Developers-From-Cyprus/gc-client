@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { RegComponent } from '../components/RegComponent/RegComponent';
+import { RegComponent } from '../auth/RegComponent/RegComponent';
 import footerImage from '../../../public/assets/images/Footer.svg';
 import { SuccessComponent } from '../components/SuccessComponent/SuccessComponent';
 

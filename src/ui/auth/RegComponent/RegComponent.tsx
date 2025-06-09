@@ -1,7 +1,7 @@
 import { useState, FormEvent, useRef } from 'react';
 import * as Form from '@radix-ui/react-form';
 
-import { Button } from '../Button/Button';
+import { Button } from '../../components/Button/Button';
 
 export interface RegComponentProps {
   onSuccess: () => void;
