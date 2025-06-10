@@ -2,6 +2,8 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import clsx from 'clsx';
 
+import { Filters } from '@/ui/homePage/Filters';
+
 // Навигационные пункты
 const MAIN_NAV = [
   { to: '/', label: 'Home', icon: 'mdi:home' },
@@ -14,7 +16,7 @@ const MAIN_NAV_PROFILE = [
   { to: '/organisations', label: 'Organisations', icon: 'mage:heart-fill' },
   { to: '/notifications', label: 'Notifications', icon: 'mage:notification-bell-fill' },
   { to: '/settings', label: 'Settings', icon: 'mage:settings-fill' },
-  { to: '/', label: 'Home', icon: 'mdi:home' },
+  { to: '/home', label: 'Home', icon: 'mdi:home' },
 ];
 
 export function Header() {
@@ -51,9 +53,10 @@ export function Header() {
     return (
       <header className="bg-white p-4 shadow flex items-center justify-between h-[100px]">
         {/* Левая кнопка «Filters» */}
-        <button className="flex flex-col items-center space-y-1 text-icons p-2">
+        {/* <button className="flex flex-col items-center space-y-1 text-icons p-2">
           <Icon icon="mage:filter-fill" width={24} height={24} />
-        </button>
+        </button> */}
+        <Filters />
         <nav className="flex space-x-6">{MAIN_NAV.slice(1).map(renderNavItem)}</nav>
       </header>
     );
