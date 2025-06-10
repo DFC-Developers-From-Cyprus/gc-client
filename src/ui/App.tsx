@@ -5,6 +5,8 @@ import { StartPage } from './pages/StartPage';
 import { HomePage } from './pages/HomePage';
 import { RegisterPage } from './pages/RegisterPage';
 import { ForgotPage } from './pages/ForgotPage';
+import { ProfilePage } from './pages/ProfilePage';
+import { SettingsPage } from './pages/SettingsPage';
 
 export function App() {
   return (
@@ -22,6 +24,8 @@ export function App() {
             <Layout>
               <Routes>
                 <Route path="/home" element={<HomePage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/settings" element={<SettingsPage />} />
                 {/* здесь можно добавить другие защищённые маршруты */}
               </Routes>
             </Layout>
