@@ -7,6 +7,7 @@ import { RegisterPage } from './pages/RegisterPage';
 import { ForgotPage } from './pages/ForgotPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { SettingsPage } from './pages/SettingsPage';
+import { DashboardPage } from './pages/DashboardPage';
 
 export function App() {
   return (
@@ -26,6 +27,7 @@ export function App() {
                 <Route path="/home" element={<HomePage />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/settings" element={<SettingsPage />} />
+                <Route path="/dashboard" element={<DashboardPage />} />
                 {/* здесь можно добавить другие защищённые маршруты */}
               </Routes>
             </Layout>
