@@ -73,7 +73,14 @@ export function LoginComponent() {
           {/* Sign In Button */}
           <Button
             type="submit"
-            states={[{ label: 'Sign In' }, { label: 'Signing In...' }]}
+            initialIndex={0}
+            states={[
+              { label: 'Sign in' },
+              { label: 'Sign in' },
+              { label: 'Sign in' },
+              { label: 'Sign in', textClass: 'text-link' },
+            ]}
+            transitionMap={{ 0: 0 }}
             className="w-full mt-2"
           />
         </form>

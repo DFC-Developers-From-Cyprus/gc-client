@@ -18,7 +18,7 @@ export function Filters() {
         <Popover.Content
           side="bottom"
           align="start"
-          className="bg-white rounded-lg shadow p-4 w-[230px] h-[200px]"
+          className="bg-white rounded-lg shadow p-4 w-[230px] h-[200px] z-1"
         >
           <div className="flex justify-between items-center mb-2 mt-[40px]">
             <span className="body-1">Location</span>
