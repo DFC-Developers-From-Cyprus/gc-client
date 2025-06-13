@@ -57,7 +57,7 @@ export const Button: React.FC<ButtonProps> = ({
       {...rest}
       onClick={handleClick}
       className={clsx(
-        'body-3 rounded-md px-4 py-2 flex items-center justify-center space-x-2',
+        'btn-text rounded-md px-4 py-2 flex items-center justify-center space-x-2',
         bgClasses,
         textColorClass,
         className,

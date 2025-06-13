@@ -31,7 +31,7 @@
   --size-body3: 16px;
   --size-link: 16px;
   --size-hlinks: 11px;
-  --size-button-txt: 11px;
+  --size-button-txt: 16px;
   --size-T: 48px;
 }
 
@@ -127,6 +127,7 @@
     font-family: var(--font-body);
     font-size: var(--size-hlinks);
     font-weight: 300;
+    color: var(--color-hint);
   }
   .btn-text {
     font-family: var(--font-body);
