@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import * as Form from '@radix-ui/react-form';
 import { Icon } from '@iconify/react';
+import { MapView } from '@/features/map/MapView';
 
 export function HomePage() {
   const [search, setSearch] = useState('');
@@ -36,11 +37,9 @@ export function HomePage() {
           </Form.Field>
         </Form.Root>
       </div>
-      {/* Map placeholder */}
+      {/* Map */}
       <div className="flex-1 p-4">
-        <div className="w-full h-full border-2 border-dashed border-card-bg rounded-lg flex items-center justify-center">
-          <span className="body-1 text-light">Map Placeholder</span>
-        </div>
+        <MapView />
       </div>
     </div>
   );
