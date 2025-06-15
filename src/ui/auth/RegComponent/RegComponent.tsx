@@ -94,7 +94,14 @@ export function RegComponent({ onSuccess }: RegComponentProps) {
             {/* Register */}
             <Button
               type="submit"
-              states={[{ label: 'Register' }, { label: 'Registering...' }]}
+              initialIndex={0}
+              states={[
+                { label: 'Register' },
+                { label: 'Register' },
+                { label: 'Register' },
+                { label: 'Register', textClass: 'text-link' },
+              ]}
+              transitionMap={{ 0: 0 }}
               className="w-full h-10 mt-2"
             />
 
@@ -136,7 +143,14 @@ export function RegComponent({ onSuccess }: RegComponentProps) {
             {/* Submit */}
             <Button
               type="submit"
-              states={[{ label: 'Submit' }, { label: 'Submitting...' }]}
+              initialIndex={0}
+              states={[
+                { label: 'Submit' },
+                { label: 'Submit' },
+                { label: 'Submit' },
+                { label: 'Submit', textClass: 'text-link' },
+              ]}
+              transitionMap={{ 0: 0 }}
               className="w-full"
             />
           </form>

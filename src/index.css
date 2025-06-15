@@ -14,6 +14,7 @@
   --color-label-2: #f1b2b5;
   --color-bg-primary: #1c179f;
   --color-bg-footer: #e7ec72;
+  --color-border: #b3b3b3;
 
   /* — шрифты и вариации — */
   --font-body: 'Open Sans', sans-serif;
@@ -54,6 +55,7 @@
   --color-label-2: var(--color-label-2);
   --color-bg-primary: var(--color-bg-primary);
   --color-bg-footer: var(--color-bg-footer);
+  --color-border: var(--color-border);
 
   /* шрифты */
   --font-body: var(--font-body);

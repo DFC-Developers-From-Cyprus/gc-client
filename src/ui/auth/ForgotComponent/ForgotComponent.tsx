@@ -80,7 +80,7 @@ export function ForgotComponent({ onCancel }: ForgotComponentProps) {
 
       {step === 'success' && (
         <div>
-          <SuccessComponent />
+          <SuccessComponent message="The link was sent to your email." />
         </div>
       )}
     </div>

@@ -1,31 +1,51 @@
-import React from 'react';
+// src/ui/pages/SettingsPage.tsx
+import React, { useState, useEffect } from 'react';
 import * as Form from '@radix-ui/react-form';
 import { useNavigate } from 'react-router-dom';
 
 import { Button } from '../components/Button/Button';
+import { SuccessComponent } from '../components/SuccessComponent/SuccessComponent';
 
 export function SettingsPage() {
   const navigate = useNavigate();
+  const [showSuccess, setShowSuccess] = useState(false);
 
-  const handleConfirm = (e: React.FormEvent) => {
+  // Обработчик сабмита формы
+  const handleConfirm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: save settings
-    alert('Settings saved');
+    // Показ уведомления об успехе
+    setShowSuccess(true);
   };
+
+  // Редирект на /profile через 5 секунд после успеха
+  useEffect(() => {
+    if (showSuccess) {
+      const timer = setTimeout(() => navigate('/profile'), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [showSuccess, navigate]);
 
   const handleLogout = () => {
     // TODO: perform logout
     navigate('/');
   };
 
+  if (showSuccess) {
+    return (
+      <div className="flex items-center justify-center">
+        <SuccessComponent message="Your settings have been saved." highlight="saved" />
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-card-bg flex items-center justify-center p-4">
-      <div className="bg-white rounded-3xl shadow w-full max-w-md p-6 space-y-6">
+    <div className="flex items-center justify-center">
+      <div className="bg-white w-full max-w-md space-y-6">
         <Form.Root asChild onSubmit={handleConfirm}>
           <form className="space-y-4">
             {/* Name */}
             <Form.Field name="name">
-              <Form.Label className="body-1 block mb-1" htmlFor="name">
+              <Form.Label className="body-3 block mb-1" htmlFor="name">
                 Name
               </Form.Label>
               <Form.Control asChild>
@@ -33,14 +53,18 @@ export function SettingsPage() {
                   id="name"
                   type="text"
                   placeholder="Value"
-                  className="w-full border border-card-bg rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-active"
+                  className="w-full border border-border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-active"
+                  required
                 />
               </Form.Control>
+              <Form.Message match="valueMissing" className="text-red-500 text-sm mt-1">
+                Please enter your name
+              </Form.Message>
             </Form.Field>
 
             {/* E-mail */}
             <Form.Field name="email">
-              <Form.Label className="body-1 block mb-1" htmlFor="email">
+              <Form.Label className="body-3 block mb-1" htmlFor="email">
                 E-mail
               </Form.Label>
               <Form.Control asChild>
@@ -48,14 +72,21 @@ export function SettingsPage() {
                   id="email"
                   type="email"
                   placeholder="Value"
-                  className="w-full border border-card-bg rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-active"
+                  className="w-full border border-border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-active"
+                  required
                 />
               </Form.Control>
+              <Form.Message match="valueMissing" className="text-red-500 text-sm mt-1">
+                Please enter your email
+              </Form.Message>
+              <Form.Message match="typeMismatch" className="text-red-500 text-sm mt-1">
+                Please enter a valid email address
+              </Form.Message>
             </Form.Field>
 
             {/* Change password */}
             <Form.Field name="password">
-              <Form.Label className="body-1 block mb-1" htmlFor="password">
+              <Form.Label className="body-3 block mb-1" htmlFor="password">
                 Change password
               </Form.Label>
               <Form.Control asChild>
@@ -63,12 +94,16 @@ export function SettingsPage() {
                   id="password"
                   type="password"
                   placeholder="Value"
-                  className="w-full border border-card-bg rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-active"
+                  className="w-full border border-border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-active"
+                  required
                 />
               </Form.Control>
+              <Form.Message match="valueMissing" className="text-red-500 text-sm mt-1">
+                Please enter a password
+              </Form.Message>
             </Form.Field>
 
-            {/* Confirm button: default state index 1 (pressed style) */}
+            {/* Confirm button */}
             <div className="pt-4">
               <Button
                 type="submit"
@@ -86,7 +121,7 @@ export function SettingsPage() {
           </form>
         </Form.Root>
 
-        {/* Logout button: default state index 3 (transparent + text-link) */}
+        {/* Logout button */}
         <div className="pt-2">
           <Button
             onClick={handleLogout}
