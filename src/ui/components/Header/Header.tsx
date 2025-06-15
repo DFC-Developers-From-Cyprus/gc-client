@@ -30,11 +30,11 @@ export function Header() {
         key={item.to}
         to={item.to}
         className={({ isActive }) =>
-          clsx('flex flex-col items-center space-y-1', isActive ? 'text-active' : 'text-icons')
+          clsx('flex flex-col items-start space-y-1', isActive ? 'text-active' : 'text-icons')
         }
       >
         <Icon icon={item.icon} width={16} height={16} />
-        <span className="body-2">{item.label}</span>
+        <span className="header-links">{item.label}</span>
       </NavLink>
     );
   }
@@ -65,7 +65,7 @@ export function Header() {
       <header className="bg-white p-4 shadow flex items-center justify-between h-[100px]">
         <div className="w-[64px] h-[67px] bg-gray-400"></div>
         <div className="flex flex-col">
-          <span>John Smith</span>
+          <span className="heading-4">John Smith</span>
           <nav className="flex space-x-6">{MAIN_NAV_PROFILE.map(renderNavItem)}</nav>
         </div>
       </header>

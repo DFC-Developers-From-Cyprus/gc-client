@@ -14,6 +14,7 @@
   --color-label-2: #f1b2b5;
   --color-bg-primary: #1c179f;
   --color-bg-footer: #e7ec72;
+  --color-border: #b3b3b3;
 
   /* — шрифты и вариации — */
   --font-body: 'Open Sans', sans-serif;
@@ -31,7 +32,7 @@
   --size-body3: 16px;
   --size-link: 16px;
   --size-hlinks: 11px;
-  --size-button-txt: 11px;
+  --size-button-txt: 16px;
   --size-T: 48px;
 }
 
@@ -54,6 +55,7 @@
   --color-label-2: var(--color-label-2);
   --color-bg-primary: var(--color-bg-primary);
   --color-bg-footer: var(--color-bg-footer);
+  --color-border: var(--color-border);
 
   /* шрифты */
   --font-body: var(--font-body);
@@ -127,6 +129,7 @@
     font-family: var(--font-body);
     font-size: var(--size-hlinks);
     font-weight: 300;
+    color: var(--color-hint);
   }
   .btn-text {
     font-family: var(--font-body);

@@ -24,7 +24,7 @@ export function RegisterPage() {
         {/* Форма регистрации */}
         <div className="p-6 mb-[150px]">
           {showSuccess ? (
-            <SuccessComponent />
+            <SuccessComponent message="You have successfully registered." highlight="registered" />
           ) : (
             <RegComponent onSuccess={() => setShowSuccess(true)} />
           )}

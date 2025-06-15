@@ -9,7 +9,7 @@ export function StartPage() {
   const [showLogin, setShowLogin] = useState(false);
 
   return (
-    <div className="min-h-screen bg-card-bg flex flex-col items-center justify-center p-4 relative">
+    <div className="min-h-screen bg-card-bg flex flex-col items-center justify-center relative">
       {/* Основной белый контейнер */}
       <div className="bg-white rounded-3xl overflow-hidden w-full max-w-sm">
         {/* Верхняя картинка с кнопкой */}
