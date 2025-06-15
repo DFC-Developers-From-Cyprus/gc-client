@@ -24,7 +24,7 @@ export function LoginComponent() {
   const handleRegister = () => navigate('/register');
 
   return (
-    <div className="bg-white rounded-lg shadow p-6 w-full max-w-sm">
+    <div>
       <Form.Root asChild onSubmit={handleSubmit} className="space-y-4">
         <form>
           {/* Email Field */}
@@ -41,7 +41,7 @@ export function LoginComponent() {
                   type="text"
                   required
                   placeholder="test"
-                  className="w-full border border-card-bg rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-active"
+                  className="w-full bg-white border border-border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-active"
                 />
               </Form.Control>
             </div>
@@ -61,7 +61,7 @@ export function LoginComponent() {
                   type="password"
                   required
                   placeholder="test1234"
-                  className="w-full border border-card-bg rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-active"
+                  className="w-full bg-white border border-border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-active"
                 />
               </Form.Control>
             </div>

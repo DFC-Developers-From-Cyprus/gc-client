@@ -39,7 +39,7 @@ export function SettingsPage() {
   }
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center px-4">
       <div className="bg-white w-full max-w-md space-y-6">
         <Form.Root asChild onSubmit={handleConfirm}>
           <form className="space-y-4">

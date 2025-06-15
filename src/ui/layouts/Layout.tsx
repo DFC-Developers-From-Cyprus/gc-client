@@ -1,4 +1,5 @@
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { Header } from '../components/Header/Header';
 import footerImage from '../../../public/assets/images/Footer.svg';
@@ -8,11 +9,37 @@ interface LayoutProps {
 }
 
 export function Layout({ children }: LayoutProps) {
+  const [isMenuOpen] = useState(false);
+  const { pathname } = useLocation();
+
+  // Показывать Footer на всех страницах, кроме '/home'
+  const showFooter = pathname !== '/home';
+
   return (
-    <div className="min-h-screen flex flex-col bg-card-white font-body text-text">
+    <div className="min-h-screen flex flex-col bg-white font-body text-text">
+      {/* Header всегда отображается */}
       <Header />
-      <main className="flex-1 container mx-auto px-4 py-6 z-[1]">{children}</main>
-      <Footer />
+
+      {/* Mobile nav drawer */}
+      {isMenuOpen && (
+        <aside className="md:hidden bg-bg-footer text-text p-4 space-y-3">
+          <a href="#" className="block header-links hover:text-active">
+            Home
+          </a>
+          <a href="#" className="block header-links hover:text-active">
+            About
+          </a>
+          <a href="#" className="block header-links hover:text-active">
+            Contact
+          </a>
+        </aside>
+      )}
+
+      {/* Main content */}
+      <main className="flex-1 container mx-auto py-6 z-[1]">{children}</main>
+
+      {/* Footer условно */}
+      {showFooter && <Footer />}
     </div>
   );
 }

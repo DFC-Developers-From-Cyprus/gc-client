@@ -18,7 +18,7 @@ export function RegisterPage() {
   }, [showSuccess, navigate]);
 
   return (
-    <div className="min-h-screen bg-card-bg flex items-center justify-center p-4 relative">
+    <div className="min-h-screen bg-card-white flex items-center justify-center relative">
       {/* Основной контейнер */}
       <div className="bg-white rounded-3xl overflow-hidden w-full max-w-sm relative">
         {/* Форма регистрации */}

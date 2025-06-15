@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import * as Form from '@radix-ui/react-form';
 import { Icon } from '@iconify/react';
+
 import { MapView } from '@/features/map/MapView';
 
 export function HomePage() {
@@ -9,7 +10,7 @@ export function HomePage() {
   const handleClear = () => setSearch('');
 
   return (
-    <div className="flex flex-col h-screen bg-card-bg">
+    <div className="flex flex-col h-screen">
       {/* Search input */}
       <div className="p-4">
         <Form.Root onSubmit={(e) => e.preventDefault()}>
@@ -38,7 +39,7 @@ export function HomePage() {
         </Form.Root>
       </div>
       {/* Map */}
-      <div className="flex-1 p-4">
+      <div className="flex-1">
         <MapView />
       </div>
     </div>

@@ -34,7 +34,7 @@ export function StartPage() {
             onClick={() => setShowLogin(false)}
           />
           {/* Модальное окно */}
-          <div className="relative bg-white rounded-xl shadow-lg w-full max-w-sm p-6 z-10">
+          <div className="relative bg-card-bg rounded-lg w-full max-w-sm p-6 z-10">
             <LoginComponent />
           </div>
         </div>
