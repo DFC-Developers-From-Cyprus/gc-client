@@ -93,7 +93,7 @@ export function Header() {
         className="flex flex-col items-center space-y-1 text-icons p-2"
       >
         <Icon icon="mdi:home" width={16} height={16} />
-        <span className="body-2">Home</span>
+        <span className="header-links">Home</span>
       </button>
       <nav className="flex space-x-6">{MAIN_NAV.slice(1).map(renderNavItem)}</nav>
     </header>

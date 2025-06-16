@@ -51,3 +51,20 @@ export const mockEvents: EventItem[] = [
     passed: true,
   },
 ];
+
+// Интерфейс организации
+export interface OrganisationItem {
+  id: string;
+  name: string;
+  imageSrc: string;
+}
+
+// Моковые данные организаций
+export const mockOrganisations: OrganisationItem[] = [
+  { id: 'org-a', name: 'Org A', imageSrc: placeholder },
+  { id: 'org-b', name: 'Org B', imageSrc: placeholder },
+  { id: 'org-c', name: 'Org C', imageSrc: placeholder },
+  { id: 'org-d', name: 'Org D', imageSrc: placeholder },
+  { id: 'org-e', name: 'Org E', imageSrc: placeholder },
+  { id: 'org-f', name: 'Org F', imageSrc: placeholder },
+];

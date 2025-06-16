@@ -19,6 +19,7 @@ export function EventsList({ events }: EventsListProps) {
       {events.map((e) => (
         <EventCardCatalog
           key={e.id}
+          id={e.id}
           imageSrc={e.imageSrc}
           title={e.title}
           organisation={e.organisation}
