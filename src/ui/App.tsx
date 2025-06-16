@@ -8,6 +8,8 @@ import { ForgotPage } from './pages/ForgotPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { SettingsPage } from './pages/SettingsPage';
 import { DashboardPage } from './pages/DashboardPage';
+import { EventPage } from './pages/EventPage';
+import { OrganisationPage } from './pages/OrganisationPage';
 
 export function App() {
   return (
@@ -28,6 +30,8 @@ export function App() {
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/settings" element={<SettingsPage />} />
                 <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/dashboard/event/:id" element={<EventPage />} />
+                <Route path="/organisations/:id" element={<OrganisationPage />} />
                 {/* здесь можно добавить другие защищённые маршруты */}
               </Routes>
             </Layout>

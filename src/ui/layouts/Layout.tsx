@@ -1,4 +1,5 @@
-import { ReactNode, useState } from 'react';
+// src/ui/layouts/Layout.tsx
+import React, { ReactNode, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { Header } from '../components/Header/Header';
@@ -12,8 +13,9 @@ export function Layout({ children }: LayoutProps) {
   const [isMenuOpen] = useState(false);
   const { pathname } = useLocation();
 
-  // Показывать Footer на всех страницах, кроме '/home'
-  const showFooter = pathname !== '/home';
+  // Пути, на которых футер НЕ отображается
+  const hideFooterOn = ['/home', '/dashboard/event/', '/start', '/register', '/reset'];
+  const showFooter = !hideFooterOn.some((p) => pathname.startsWith(p));
 
   return (
     <div className="min-h-screen flex flex-col bg-white font-body text-text">
@@ -39,11 +41,11 @@ export function Layout({ children }: LayoutProps) {
       <main className="flex-1 container mx-auto py-6 z-[1]">{children}</main>
 
       {/* Footer условно */}
-      {showFooter && <Footer />}
+      {showFooter && (
+        <footer>
+          <img src={footerImage} alt="Logo" />
+        </footer>
+      )}
     </div>
   );
-}
-
-function Footer() {
-  return <img src={footerImage} alt="Logo" />;
 }
