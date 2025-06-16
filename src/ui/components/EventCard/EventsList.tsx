@@ -3,10 +3,11 @@ import { EventCardCatalog } from './EventCardCatalog';
 export interface EventItem {
   id: string;
   title: string;
-  organisation: string;
+  text: string;
   description: string;
   imageSrc: string;
   passed: boolean;
+  organisationId: string;
 }
 
 interface EventsListProps {
@@ -22,7 +23,7 @@ export function EventsList({ events }: EventsListProps) {
           id={e.id}
           imageSrc={e.imageSrc}
           title={e.title}
-          organisation={e.organisation}
+          organisation={e.organisationId}
           description={e.description}
         />
       ))}

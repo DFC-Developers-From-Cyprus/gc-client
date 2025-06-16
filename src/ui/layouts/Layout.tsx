@@ -14,13 +14,7 @@ export function Layout({ children }: LayoutProps) {
   const { pathname } = useLocation();
 
   // Пути, на которых футер НЕ отображается
-  const hideFooterOn = [
-    '/home',
-    '/dashboard/event/', // просмотр одного события
-    '/start',
-    '/register',
-    '/reset',
-  ];
+  const hideFooterOn = ['/home', '/dashboard/event/', '/start', '/register', '/reset'];
   const showFooter = !hideFooterOn.some((p) => pathname.startsWith(p));
 
   return (

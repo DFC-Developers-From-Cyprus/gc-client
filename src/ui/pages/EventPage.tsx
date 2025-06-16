@@ -11,19 +11,18 @@ export function EventPage() {
   const event = mockEvents.find((e) => e.id === id);
   if (!event) return <div className="p-4">Event not found</div>;
 
-  // Найдём полное имя организации
-  const org = mockOrganisations.find((o) => o.id === event.organisation);
+  const org = mockOrganisations.find((o) => o.id === event.organisationId)!;
 
   return (
     <div className="flex flex-col p-4 space-y-6">
-      {/* Заголовок страницы */}
       <h2 className="heading-2">{event.title}</h2>
 
-      {/* Полная карточка */}
       <EventCardFull
         imageSrc={event.imageSrc}
         title={event.title}
-        organisation={org?.name || event.organisation}
+        text={event.text}
+        organisationId={org.id}
+        organisationName={org.name}
         description={event.description}
         alt={event.title}
       />
