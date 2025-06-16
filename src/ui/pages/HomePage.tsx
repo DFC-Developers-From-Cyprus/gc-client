@@ -1,4 +1,3 @@
-// src/ui/pages/HomePage.tsx
 import { useState } from 'react';
 import * as Form from '@radix-ui/react-form';
 import { Icon } from '@iconify/react';
