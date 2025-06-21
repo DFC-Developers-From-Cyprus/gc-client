@@ -4,7 +4,7 @@ import * as Slider from '@radix-ui/react-slider';
 import { Icon } from '@iconify/react';
 
 export function Filters() {
-  const [range, setRange] = useState<[number, number]>([0, 100]);
+  const [range, setRange] = useState<number[]>([0, 100]);
 
   return (
     <Popover.Root>
