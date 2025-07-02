@@ -10,6 +10,7 @@ import { SettingsPage } from './pages/SettingsPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { EventPage } from './pages/EventPage';
 import { OrganisationPage } from './pages/OrganisationPage';
+import { CreateReportPage } from '@/ui/pages/CreateReportPage';
 
 export function App() {
   return (
@@ -33,6 +34,7 @@ export function App() {
                 <Route path="/dashboard/event/:id" element={<EventPage />} />
                 <Route path="/organisations/:id" element={<OrganisationPage />} />
                 {/* здесь можно добавить другие защищённые маршруты */}
+                <Route path="/create_report" element={<CreateReportPage />} />
               </Routes>
             </Layout>
           }

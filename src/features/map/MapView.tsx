@@ -4,6 +4,7 @@ import { LatLngExpression } from 'leaflet';
 
 import { ZoomControls } from '@/features/map/ZoomControls';
 import { DashboardButton } from '@/features/map/DashboardButton';
+import { CreateReportButton } from '@/features/map/CreateReportButton';
 
 // Центр карты (Кипр)
 const center: LatLngExpression = [35.1856, 33.3823];
@@ -40,12 +41,7 @@ export const MapView = () => {
       </div>
       {/* Add polluted area */}
       <div className="absolute bottom-10 left-4 h-10 z-[1000]">
-        <button
-          className="w-10 h-10 rounded-md bg-white shadow flex items-center justify-center transition cursor-pointer active:scale-95"
-          title="Add Area"
-        >
-          <img src="src/assets/icons/map/add.svg" alt="Add Area" className="w-6 h-6" />
-        </button>
+        <CreateReportButton />
       </div>
     </div>
   );

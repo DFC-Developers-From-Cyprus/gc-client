@@ -6,7 +6,8 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": ["node"]
+    "types": ["node"],
+    "jsx": "react"
   },
   "include": ["src"]
 }
