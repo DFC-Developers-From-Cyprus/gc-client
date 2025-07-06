@@ -12,7 +12,7 @@ export function ProfilePage() {
   const filtered = mockEvents.filter((ev) => (selected === 'inprogress' ? !ev.passed : ev.passed));
 
   return (
-    <div className="flex flex-col px-[19px] pt-4">
+    <div className="flex flex-col items-center px-[19px] pt-4">
       <div className="flex space-x-[13px]">
         {/* In Progress */}
         <Button

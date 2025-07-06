@@ -1,4 +1,4 @@
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import clsx from 'clsx';
 
@@ -7,13 +7,13 @@ import { Filters } from '@/ui/components/homePage/Filters';
 // Навигационные пункты
 const MAIN_NAV = [
   { to: '/', label: 'Home', icon: 'mdi:home' },
-  { to: '/organisations', label: 'Organisations', icon: 'mage:heart-fill' },
+  { to: '/favourite', label: 'Organizations', icon: 'mage:heart-fill' },
   { to: '/notifications', label: 'Notifications', icon: 'mage:notification-bell-fill' },
   { to: '/profile', label: 'Profile', icon: 'mdi:account' },
 ];
 
 const MAIN_NAV_PROFILE = [
-  { to: '/organisations', label: 'Organisations', icon: 'mage:heart-fill' },
+  { to: '/favourite', label: 'Organizations', icon: 'mage:heart-fill' },
   { to: '/notifications', label: 'Notifications', icon: 'mage:notification-bell-fill' },
   { to: '/settings', label: 'Settings', icon: 'mage:settings-fill' },
   { to: '/home', label: 'Home', icon: 'mdi:home' },
@@ -21,7 +21,7 @@ const MAIN_NAV_PROFILE = [
 
 export function Header() {
   const { pathname } = useLocation();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // Функция отрисовки пункта меню с иконкой и подписью
   function renderNavItem(item: (typeof MAIN_NAV)[number]) {
@@ -87,15 +87,12 @@ export function Header() {
 
   // 5) На всех остальных путях: слева «Home» (иконка+текст), справа остальные пункты
   return (
-    <header className="bg-white p-4 shadow flex items-center justify-between h-[100px]">
-      <button
-        onClick={() => navigate('/home')}
-        className="flex flex-col items-center space-y-1 text-icons p-2"
-      >
-        <Icon icon="mdi:home" width={16} height={16} />
-        <span className="header-links">Home</span>
-      </button>
-      <nav className="flex space-x-6">{MAIN_NAV.slice(1).map(renderNavItem)}</nav>
+    <header className="bg-white p-4 shadow flex items-start justify-between h-[116px]">
+      <div className="w-[64px] h-[67px] bg-gray-400"></div>
+      <div className="flex flex-col">
+        <span>John Smith</span>
+        <nav className="flex space-x-6">{MAIN_NAV_PROFILE.map(renderNavItem)}</nav>
+      </div>
     </header>
   );
 }

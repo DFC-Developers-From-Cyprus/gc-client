@@ -9,8 +9,10 @@ import { ProfilePage } from './pages/ProfilePage';
 import { SettingsPage } from './pages/SettingsPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { EventPage } from './pages/EventPage';
-import { OrganisationPage } from './pages/OrganisationPage';
+import { OrganizationPage } from './pages/OrganizationPage';
+
 import { CreateReportPage } from '@/ui/pages/CreateReportPage';
+import { FavouritePage } from '@/ui/pages/FavouritePage';
 
 export function App() {
   return (
@@ -30,9 +32,10 @@ export function App() {
                 <Route path="/home" element={<HomePage />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/settings" element={<SettingsPage />} />
+                <Route path="/favourite" element={<FavouritePage />} />
                 <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/dashboard/event/:id" element={<EventPage />} />
-                <Route path="/organisations/:id" element={<OrganisationPage />} />
+                <Route path="/organization/:id" element={<OrganizationPage />} />
                 {/* здесь можно добавить другие защищённые маршруты */}
                 <Route path="/create_report" element={<CreateReportPage />} />
               </Routes>

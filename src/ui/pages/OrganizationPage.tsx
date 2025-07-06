@@ -1,12 +1,12 @@
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { OrganisationCard } from '../components/organisationPage/OrganisationCard';
-import { EventsListMini } from '../components/organisationPage/EventListMini';
+import { OrganizationCard } from '../components/organizationPage/OrganizationCard';
+import { EventsListMini } from '../components/organizationPage/EventListMini';
 import { Button } from '../components/Button/Button';
 
 import { mockOrganisations, mockEvents } from '@/data/mockEvents';
 
-export function OrganisationPage() {
+export function OrganizationPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ export function OrganisationPage() {
       <h1 className="heading-2">{org.name}</h1>
 
       {/* Карточка организации */}
-      <OrganisationCard
+      <OrganizationCard
         name={org.name}
         text={org.text}
         description={`Description for ${org.name}`}

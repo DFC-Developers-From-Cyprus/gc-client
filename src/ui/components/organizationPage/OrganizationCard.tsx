@@ -1,4 +1,4 @@
-export interface OrganisationCardProps {
+export interface OrganizationCardProps {
   name: string;
   text: string;
   description: string;
@@ -6,13 +6,13 @@ export interface OrganisationCardProps {
   alt?: string;
 }
 
-export function OrganisationCard({
+export function OrganizationCard({
   name,
   text,
   description,
   imageSrc,
   alt = name,
-}: OrganisationCardProps) {
+}: OrganizationCardProps) {
   return (
     <div className="bg-white rounded-lg shadow p-4 w-full max-w-md flex flex-col space-y-4">
       {/* Картинка */}

@@ -43,7 +43,7 @@ export function Layout({ children }: LayoutProps) {
       {/* Footer условно */}
       {showFooter && (
         <footer>
-          <img src={footerImage} alt="Logo" />
+          <img src={footerImage} alt="Logo" className="w-full" />
         </footer>
       )}
     </div>
