@@ -27,7 +27,7 @@ export function EventCardFull({
       {/* Пилл с текстом organisationName, навигация по organisationId */}
       <button
         type="button"
-        onClick={() => navigate(`/organisations/${organisationId}`)}
+        onClick={() => navigate(`/organization/${organisationId}`)}
         className="w-[88px] bg-bg-footer rounded-full subtitle-1 text-center"
       >
         {organisationName}

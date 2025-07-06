@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import clsx from 'clsx';
 
@@ -21,7 +21,7 @@ const MAIN_NAV_PROFILE = [
 
 export function Header() {
   const { pathname } = useLocation();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // Функция отрисовки пункта меню с иконкой и подписью
   function renderNavItem(item: (typeof MAIN_NAV)[number]) {
@@ -60,7 +60,7 @@ export function Header() {
   }
 
   // 3) Страница профиля "/profile": слева аватар, справа остальные пункты с подписями (организации, нотификейшн, настройки, Home)
-  if (pathname === '/profile') {
+  if (pathname === '/profile' || pathname === '/favourite' || pathname === '/notifications') {
     return (
       <header className="bg-white p-4 shadow flex items-center justify-between h-[100px]">
         <div className="w-[64px] h-[67px] bg-gray-400"></div>
@@ -87,12 +87,15 @@ export function Header() {
 
   // 5) На всех остальных путях: слева «Home» (иконка+текст), справа остальные пункты
   return (
-    <header className="bg-white p-4 shadow flex items-start justify-between h-[116px]">
-      <div className="w-[64px] h-[67px] bg-gray-400"></div>
-      <div className="flex flex-col">
-        <span>John Smith</span>
-        <nav className="flex space-x-6">{MAIN_NAV_PROFILE.map(renderNavItem)}</nav>
-      </div>
+    <header className="bg-white p-4 shadow flex items-center justify-between h-[100px]">
+      <button
+        onClick={() => navigate('/home')}
+        className="flex flex-col items-center space-y-1 text-icons p-2"
+      >
+        <Icon icon="mdi:home" width={16} height={16} />
+        <span className="header-links">Home</span>
+      </button>
+      <nav className="flex space-x-6">{MAIN_NAV.slice(1).map(renderNavItem)}</nav>
     </header>
   );
 }
