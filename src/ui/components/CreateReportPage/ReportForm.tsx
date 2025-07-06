@@ -2,11 +2,36 @@ import * as Form from '@radix-ui/react-form';
 import * as Checkbox from '@radix-ui/react-checkbox';
 import { CheckIcon } from '@radix-ui/react-icons';
 
+import { createReport } from '@/api/report';
 import { Button } from '@/ui/components/Button/Button';
 
 export function ReportForm() {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+
+    const payload = {
+      title: formData.get('title') as string,
+      description: formData.get('description') as string,
+      created_by: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+      status: 'active',
+      location: '35.1856, 33.3823',
+      // media: form.media.files
+    };
+
+    try {
+      const response = await createReport(payload);
+      console.log('Report created: ', response.data);
+    } catch (error) {
+      console.error('Failed to create report.', error);
+    }
+  };
+
   return (
-    <Form.Root className="max-w-2xl mx-auto bg-white rounded-2xl p-8 space-y-2">
+    <Form.Root
+      onSubmit={handleSubmit}
+      className="max-w-2xl mx-auto bg-white rounded-2xl p-8 space-y-2"
+    >
       <div className="grid gap-1 border border-gray-300 rounded-lg px-4 py-4 ">
         <h1 className="text-l">Report contaminated area</h1>
         <p className="text-gray-500">Share information about contaminated areas</p>
@@ -111,7 +136,7 @@ export function ReportForm() {
         </Form.Control>
         <label htmlFor="media-upload" className="cursor-pointer">
           <img
-            src="src/assets/icons/report_form/location.svg"
+            src="src/assets/icons/report_form/add_media.svg"
             alt="Add Media"
             className="w-5 h-5"
           />
