@@ -4,24 +4,49 @@ import { CheckIcon } from '@radix-ui/react-icons';
 
 import { createReport } from '@/api/report';
 import { Button } from '@/ui/components/Button/Button';
+import { createPolllutedArea } from '@/api/polluted-area';
 
 export function ReportForm() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
 
-    const payload = {
+    const levelMap = {
+      low: 1,
+      middle: 2,
+      high: 3,
+    };
+
+    const selectedLevel = formData.get('level') as string;
+    const pollution_level = levelMap[selectedLevel] || 1;
+
+    const reportPayload = {
       title: formData.get('title') as string,
       description: formData.get('description') as string,
       created_by: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
       status: 'active',
-      location: '35.1856, 33.3823',
+      location: formData.get('location') as string,
       // media: form.media.files
     };
 
     try {
-      const response = await createReport(payload);
-      console.log('Report created: ', response.data);
+      // Create report
+      const reportRes = await createReport(reportPayload);
+      const uuid =reportRes.data.uuid;
+      console.log('Report created: ', reportRes.data);
+
+      // if uuid - send to /polluted-area
+      const pollutedPayload = {
+        project_uuid: uuid,
+        type_of_pollution: formData.get('type') as string,
+        pollution_level: pollution_level,
+        description: reportPayload.description,
+        location: reportPayload.location,
+      };
+
+      const pollutedRes = await createPolllutedArea(pollutedPayload);
+      console.log('Polluted area created:', pollutedRes.data);
+
     } catch (error) {
       console.error('Failed to create report.', error);
     }
