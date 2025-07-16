@@ -13,6 +13,7 @@ import { OrganizationPage } from './pages/OrganizationPage';
 
 import { CreateReportPage } from '@/ui/pages/CreateReportPage';
 import { FavouritePage } from '@/ui/pages/FavouritePage';
+import { FormStatusPage } from '@/ui/pages/FormStatusPage';
 
 export function App() {
   return (
@@ -38,6 +39,7 @@ export function App() {
                 <Route path="/organization/:id" element={<OrganizationPage />} />
                 {/* здесь можно добавить другие защищённые маршруты */}
                 <Route path="/create_report" element={<CreateReportPage />} />
+                <Route path="/status" element={<FormStatusPage />} />
               </Routes>
             </Layout>
           }
