@@ -1,17 +1,25 @@
 import * as Form from '@radix-ui/react-form';
 import * as Checkbox from '@radix-ui/react-checkbox';
 import { CheckIcon } from '@radix-ui/react-icons';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { createReport } from '@/api/report';
 import { Button } from '@/ui/components/Button/Button';
 import { createPolllutedArea } from '@/api/polluted-area';
 
+import { FormStatusPage } from '@/ui/pages/FormStatusPage';
+
 export function ReportForm() {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setIsLoading(true);
     const formData = new FormData(event.currentTarget);
 
-    const levelMap = {
+    const levelMap: Record<string, number> = {
       low: 1,
       middle: 2,
       high: 3,
@@ -32,7 +40,7 @@ export function ReportForm() {
     try {
       // Create report
       const reportRes = await createReport(reportPayload);
-      const uuid =reportRes.data.uuid;
+      const uuid = reportRes.data.uuid;
       console.log('Report created: ', reportRes.data);
 
       // if uuid - send to /polluted-area
@@ -44,13 +52,18 @@ export function ReportForm() {
         location: reportPayload.location,
       };
 
-      const pollutedRes = await createPolllutedArea(pollutedPayload);
-      console.log('Polluted area created:', pollutedRes.data);
-
+      await createPolllutedArea(pollutedPayload);
+      navigate('/');
     } catch (error) {
       console.error('Failed to create report.', error);
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  if (isLoading) {
+    return <FormStatusPage />;
+  }
 
   return (
     <Form.Root
