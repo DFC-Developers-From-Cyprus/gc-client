@@ -2,6 +2,8 @@ import { useState, FormEvent, useRef } from 'react';
 import * as Form from '@radix-ui/react-form';
 
 import { Button } from '../../components/Button/Button';
+import {register} from '@/api/auth';
+import { useNavigate } from 'react-router-dom';
 
 export interface RegComponentProps {
   onSuccess: () => void;
@@ -10,20 +12,41 @@ export interface RegComponentProps {
 export function RegComponent({ onSuccess }: RegComponentProps) {
   const [step, setStep] = useState<'initial' | 'confirm'>('initial');
   const formRef = useRef<HTMLFormElement>(null);
+  const navigate = useNavigate()
 
   const handleJoinOrg = () => {
     alert('Join as an organization clicked');
   };
 
   // Обработчик первой формы
-  const handleInitialSubmit = (e: FormEvent) => {
+  const handleInitialSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const form = formRef.current!;
-    if (form.checkValidity()) {
-      setStep('confirm');
-    } else {
+    // Проверка валидности
+    if (!form.checkValidity()) {
       form.reportValidity();
+      // setStep('confirm');
     }
+    // Подготовка данных
+    const formData = new FormData(form);
+    const payload = {
+      email: formData.get('email') as string,
+      username: formData.get('username') as string,
+      password: formData.get('password') as string,
+      role: 'volunteer',
+    }
+
+    try {
+      // Попытка регистрации
+      await register(payload);
+      // Eсли успешно -> переход на страницу для авторизации
+      navigate('/')
+    } catch (error) {
+      console.log('Registration failed: ', error)
+      alert('Registration failed')
+    }
+
+
   };
 
   // Обработчик второго шага
@@ -46,6 +69,7 @@ export function RegComponent({ onSuccess }: RegComponentProps) {
       {step === 'initial' && (
         <Form.Root asChild onSubmit={handleInitialSubmit}>
           <form ref={formRef} className="space-y-4">
+
             {/* Email */}
             <Form.Field name="email">
               <div className="flex flex-col">
@@ -66,6 +90,27 @@ export function RegComponent({ onSuccess }: RegComponentProps) {
                 </Form.Message>
                 <Form.Message match="typeMismatch" className="text-red-500 text-sm mt-1">
                   Invalid email address
+                </Form.Message>
+              </div>
+            </Form.Field>
+
+            {/* Username */}
+            <Form.Field name="username">
+              <div className="flex flex-col">
+                <Form.Label className="body-3 mb-1" htmlFor="username">
+                  Username
+                </Form.Label>
+                <Form.Control asChild>
+                  <input
+                    id="username"
+                    type="username"
+                    required
+                    placeholder="Value"
+                    className="w-full border border-card-bg rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-active"
+                  />
+                </Form.Control>
+                <Form.Message match="valueMissing" className="text-red-500 text-sm mt-1">
+                  Please enter your username
                 </Form.Message>
               </div>
             </Form.Field>
