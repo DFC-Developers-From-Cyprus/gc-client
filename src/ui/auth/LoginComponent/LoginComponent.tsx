@@ -1,22 +1,35 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as Form from '@radix-ui/react-form';
+import { useDispatch } from 'react-redux';
+import {setUser} from '@/core/store/authSlice';
+import { login } from '@/api/auth';
 
 import { Button } from '../../components/Button/Button';
 
 export function LoginComponent() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Простая проверка учётки
-    if (email === 'test' && password === 'test1234') {
-      navigate('/home');
-    } else {
-      setError('Invalid credentials');
+//     if (email === 'test' && password === 'test1234') {
+//       navigate('/home');
+//     } else {
+//       setError('Invalid credentials');
+//     }
+    try {
+      const response = await login({ username, password });
+      console.log(response)
+      dispatch(setUser(response))
+      navigate('/home')
+    } catch(err) {
+      setError('Invalid data');
+      console.error('Login failed: ', err);
     }
   };
 
@@ -27,20 +40,20 @@ export function LoginComponent() {
     <div>
       <Form.Root asChild onSubmit={handleSubmit} className="space-y-4">
         <form>
-          {/* Email Field */}
-          <Form.Field name="email">
+          {/* Username Field */}
+          <Form.Field name="username">
             <div className="flex flex-col">
-              <Form.Label className="body-1 mb-1" htmlFor="email">
-                Email
+              <Form.Label className="body-1 mb-1" htmlFor="username">
+                Username
               </Form.Label>
               <Form.Control asChild>
                 <input
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  id="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                   type="text"
                   required
-                  placeholder="test"
+                  placeholder="Enter your username"
                   className="w-full bg-white border border-border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-active"
                 />
               </Form.Control>
@@ -60,7 +73,7 @@ export function LoginComponent() {
                   onChange={(e) => setPassword(e.target.value)}
                   type="password"
                   required
-                  placeholder="test1234"
+                  placeholder="Enter your password"
                   className="w-full bg-white border border-border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-active"
                 />
               </Form.Control>
