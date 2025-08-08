@@ -6,9 +6,9 @@ export default defineConfig({
   theme: {
     extend: {
       fontFamily: {
-        yeseva: ['"Yeseva One"', 'cursive'],
+        yeseva: ['"Yeseva One"', 'serif'],
         opensans: ['"Open Sans"', 'sans-serif'],
     },
   },
   plugins: [],
-});
+}});
