@@ -10,5 +10,6 @@ export default defineConfig({
         opensans: ['"Open Sans"', 'sans-serif'],
     },
   },
+  safelist: ['font-yeseva'],
   plugins: [],
 }});
