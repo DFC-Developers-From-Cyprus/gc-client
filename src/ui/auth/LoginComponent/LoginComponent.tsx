@@ -27,7 +27,6 @@ export function LoginComponent() {
     try {
       console.log(username, password);
       const response = await login({ username: username, password: password });
-      console.log(response);
       dispatch(setUser(response));
       navigate('/home');
     } catch (err) {
