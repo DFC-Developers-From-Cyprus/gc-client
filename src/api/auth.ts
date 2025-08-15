@@ -7,12 +7,12 @@ export const login = async (data: { username: string; password: string }) => {
 };
 
 // регистрация пользователя
-export const register = async (data:
-                                 { email: string;
-                                   username:string;
-                                   password: string;
-                                   role: string
-                                 }) => {
+export const register = async (data: {
+  email: string;
+  username: string;
+  password: string;
+  role: string;
+}) => {
   const res = await api.post('/api/auth/registration/', data);
   return res.data;
 };

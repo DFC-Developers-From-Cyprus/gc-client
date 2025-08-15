@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as Form from '@radix-ui/react-form';
 import { useDispatch } from 'react-redux';
-import {setUser} from '@/core/store/authSlice';
-import { login } from '@/api/auth';
 
 import { Button } from '../../components/Button/Button';
+
+import { setUser } from '@/core/store/authSlice';
+import { login } from '@/api/auth';
 
 export function LoginComponent() {
   const dispatch = useDispatch();
@@ -17,17 +18,19 @@ export function LoginComponent() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Простая проверка учётки
-//     if (email === 'test' && password === 'test1234') {
-//       navigate('/home');
-//     } else {
-//       setError('Invalid credentials');
-//     }
+    //     if (email === 'test' && password === 'test1234') {
+    //       navigate('/home');
+    //     } else {
+    //       setError('Invalid credentials');
+    //     }
+
     try {
-      const response = await login({ username, password });
-      console.log(response)
-      dispatch(setUser(response))
-      navigate('/home')
-    } catch(err) {
+      console.log(username, password);
+      const response = await login({ username: username, password: password });
+      console.log(response);
+      dispatch(setUser(response));
+      navigate('/home');
+    } catch (err) {
       setError('Invalid data');
       console.error('Login failed: ', err);
     }

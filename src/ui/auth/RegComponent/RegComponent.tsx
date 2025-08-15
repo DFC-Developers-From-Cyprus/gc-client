@@ -1,9 +1,10 @@
 import { useState, FormEvent, useRef } from 'react';
 import * as Form from '@radix-ui/react-form';
+import { useNavigate } from 'react-router-dom';
 
 import { Button } from '../../components/Button/Button';
-import {register} from '@/api/auth';
-import { useNavigate } from 'react-router-dom';
+
+import { register } from '@/api/auth';
 
 export interface RegComponentProps {
   onSuccess: () => void;
@@ -12,7 +13,7 @@ export interface RegComponentProps {
 export function RegComponent({ onSuccess }: RegComponentProps) {
   const [step, setStep] = useState<'initial' | 'confirm'>('initial');
   const formRef = useRef<HTMLFormElement>(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleJoinOrg = () => {
     alert('Join as an organization clicked');
@@ -25,7 +26,7 @@ export function RegComponent({ onSuccess }: RegComponentProps) {
     // Проверка валидности
     if (!form.checkValidity()) {
       form.reportValidity();
-      // setStep('confirm');
+      setStep('confirm');
     }
     // Подготовка данных
     const formData = new FormData(form);
@@ -34,19 +35,18 @@ export function RegComponent({ onSuccess }: RegComponentProps) {
       username: formData.get('username') as string,
       password: formData.get('password') as string,
       role: 'volunteer',
-    }
+    };
 
     try {
       // Попытка регистрации
-      await register(payload);
+      const response = await register(payload);
       // Eсли успешно -> переход на страницу для авторизации
-      navigate('/')
+      navigate('/');
+      alert(response.message);
     } catch (error) {
-      console.log('Registration failed: ', error)
-      alert('Registration failed')
+      console.log('Registration failed: ', error);
+      alert('Registration failed');
     }
-
-
   };
 
   // Обработчик второго шага
@@ -69,7 +69,6 @@ export function RegComponent({ onSuccess }: RegComponentProps) {
       {step === 'initial' && (
         <Form.Root asChild onSubmit={handleInitialSubmit}>
           <form ref={formRef} className="space-y-4">
-
             {/* Email */}
             <Form.Field name="email">
               <div className="flex flex-col">

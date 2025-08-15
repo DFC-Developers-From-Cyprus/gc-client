@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import { createReport } from '@/api/report';
 import { Button } from '@/ui/components/Button/Button';
 import { createPolllutedArea } from '@/api/polluted-area';
-
 import { FormStatusPage } from '@/ui/pages/FormStatusPage';
 
 export function ReportForm() {

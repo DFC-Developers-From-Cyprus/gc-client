@@ -1,9 +1,7 @@
 export function FormStatusPage() {
   return (
     <div className="flex flex-col items-center w-full h-screen p-4">
-      <h1 className="status-title">
-        Please, wait
-      </h1>
+      <h1 className="status-title">Please, wait</h1>
       <img
         src="src/assets/img/status.svg"
         alt="Status image"
