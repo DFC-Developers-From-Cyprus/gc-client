@@ -2,19 +2,41 @@
 import React, { useState, useEffect } from 'react';
 import * as Form from '@radix-ui/react-form';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { store } from '@/core/store/store';
+import { updateProfile } from '@/api/profile';
 
 import { Button } from '../components/Button/Button';
 import { SuccessComponent } from '../components/SuccessComponent/SuccessComponent';
 
 export function SettingsPage() {
+  const { uuid } = useSelector((state: store) => state.auth.user)
   const navigate = useNavigate();
   const [showSuccess, setShowSuccess] = useState(false);
 
   // Обработчик сабмита формы
-  const handleConfirm = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleConfirm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Показ уведомления об успехе
-    setShowSuccess(true);
+
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+
+    const payload = {
+      username: formData.get('name') as string,
+      email: formData.get('email') as string,
+      role: "volunteer"
+      // password: formData.get('password') as string,
+    };
+    console.log(payload);
+
+    try {
+      if( uuid ) {
+        await updateProfile( uuid, payload);
+        setShowSuccess(true);
+      }
+    } catch (err) {
+      console.error('Profile update failed: ', err);
+    }
   };
 
   // Редирект на /profile через 5 секунд после успеха
@@ -85,23 +107,23 @@ export function SettingsPage() {
             </Form.Field>
 
             {/* Change password */}
-            <Form.Field name="password">
-              <Form.Label className="body-3 block mb-1" htmlFor="password">
-                Change password
-              </Form.Label>
-              <Form.Control asChild>
-                <input
-                  id="password"
-                  type="password"
-                  placeholder="Value"
-                  className="w-full border border-border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-active"
-                  required
-                />
-              </Form.Control>
-              <Form.Message match="valueMissing" className="text-red-500 text-sm mt-1">
-                Please enter a password
-              </Form.Message>
-            </Form.Field>
+            {/*<Form.Field name="password">*/}
+            {/*  <Form.Label className="body-3 block mb-1" htmlFor="password">*/}
+            {/*    Change password*/}
+            {/*  </Form.Label>*/}
+            {/*  <Form.Control asChild>*/}
+            {/*    <input*/}
+            {/*      id="password"*/}
+            {/*      type="password"*/}
+            {/*      placeholder="Value"*/}
+            {/*      className="w-full border border-border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-active"*/}
+            {/*      required*/}
+            {/*    />*/}
+            {/*  </Form.Control>*/}
+            {/*  <Form.Message match="valueMissing" className="text-red-500 text-sm mt-1">*/}
+            {/*    Please enter a password*/}
+            {/*  </Form.Message>*/}
+            {/*</Form.Field>*/}
 
             {/* Confirm button */}
             <div className="pt-4">

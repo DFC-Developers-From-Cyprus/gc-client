@@ -1,4 +1,6 @@
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { store } from '@/core/store/store';
 import { Icon } from '@iconify/react';
 import clsx from 'clsx';
 
@@ -20,6 +22,7 @@ const MAIN_NAV_PROFILE = [
 ];
 
 export function Header() {
+  const user = useSelector((state: store) => state.auth.user)
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -65,7 +68,7 @@ export function Header() {
       <header className="bg-white p-4 shadow flex items-center justify-between h-[100px]">
         <div className="w-[64px] h-[67px] bg-gray-400"></div>
         <div className="flex flex-col">
-          <span className="heading-4">John Smith</span>
+          <span className="heading-4">{ user?.username || 'User'}</span>
           <nav className="flex space-x-6">{MAIN_NAV_PROFILE.map(renderNavItem)}</nav>
         </div>
       </header>
@@ -78,7 +81,7 @@ export function Header() {
       <header className="bg-white p-4 shadow flex items-start justify-between h-[116px]">
         <div className="w-[86px] h-[84px] bg-gray-400"></div>
         <div className="flex flex-col">
-          <span>John Smith</span>
+          <span>{ user?.username || 'User'}</span>
           <nav className="flex space-x-6">{MAIN_NAV_PROFILE.map(renderNavItem)}</nav>
         </div>
       </header>

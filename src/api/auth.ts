@@ -17,8 +17,3 @@ export const register = async (data: {
   return res.data;
 };
 
-// восстановление пароля
-export const forgotPassword = async (data: { email: string; password: string }) => {
-  const res = await api.post('/api/auth/forgot-password', data);
-  return res.data;
-};
