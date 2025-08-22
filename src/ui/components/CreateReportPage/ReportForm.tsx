@@ -3,6 +3,8 @@ import * as Checkbox from '@radix-ui/react-checkbox';
 import { CheckIcon } from '@radix-ui/react-icons';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { store } from '@/core/store/store';
 
 import { createReport } from '@/api/report';
 import { Button } from '@/ui/components/Button/Button';
@@ -10,6 +12,7 @@ import { createPolllutedArea } from '@/api/polluted-area';
 import { FormStatusPage } from '@/ui/pages/FormStatusPage';
 
 export function ReportForm() {
+  const { uuid } = useSelector((state: store) => state.auth.user)
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -30,7 +33,7 @@ export function ReportForm() {
     const reportPayload = {
       title: formData.get('title') as string,
       description: formData.get('description') as string,
-      created_by: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+      created_by: uuid,
       status: 'active',
       location: formData.get('location') as string,
       // media: form.media.files
@@ -52,7 +55,7 @@ export function ReportForm() {
       };
 
       await createPolllutedArea(pollutedPayload);
-      navigate('/');
+      navigate('/home');
     } catch (error) {
       console.error('Failed to create report.', error);
     } finally {

@@ -9,5 +9,5 @@ interface Report {
 }
 
 export const createReport = (data: Report) => {
-  return api.post('/project/', data);
+  return api.post('api/env/project/', data);
 };

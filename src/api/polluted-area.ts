@@ -9,5 +9,5 @@ interface PollutedAreaPayload {
 }
 
 export const createPolllutedArea = (data: PollutedAreaPayload) => {
-  return api.post('/polluted-area/', data);
+  return api.post('api/env/polluted-area/', data);
 };
