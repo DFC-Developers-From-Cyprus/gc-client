@@ -21,7 +21,7 @@ export function EventCardCatalog({
   const navigate = useNavigate();
 
   return (
-    <div className="bg-white rounded-lg shadow p-4 w-full max-w-md flex items-start space-x-4">
+    <div className="bg-white rounded-xl shadow p-4 w-full flex items-start space-x-4">
       {/* картинка */}
       <div className="w-40 h-28 rounded bg-card-bg overflow-hidden flex-shrink-0">
         <img src={imageSrc} alt={alt} className="object-cover w-full h-full" />

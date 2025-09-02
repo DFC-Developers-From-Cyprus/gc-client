@@ -1,13 +1,13 @@
 import { EventCardCatalog } from './EventCardCatalog';
 
 export interface EventItem {
-  id: string;
+  uuid: string;
   title: string;
   text: string;
   description: string;
   imageSrc: string;
   passed: boolean;
-  organisationId: string;
+  username: string;
 }
 
 interface EventsListProps {
@@ -16,14 +16,14 @@ interface EventsListProps {
 
 export function EventsList({ events }: EventsListProps) {
   return (
-    <div className="space-y-4 mb-[-100px]">
+    <div className="w-full space-y-4">
       {events.map((e) => (
         <EventCardCatalog
-          key={e.id}
-          id={e.id}
+          key={e.uuid}
+          id={e.uuid}
           imageSrc={e.imageSrc}
           title={e.title}
-          organisation={e.organisationId}
+          organisation={e.username}
           description={e.description}
         />
       ))}
