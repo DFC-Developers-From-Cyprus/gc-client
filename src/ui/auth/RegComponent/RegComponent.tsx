@@ -1,5 +1,6 @@
 import { useState, FormEvent, useRef } from 'react';
 import * as Form from '@radix-ui/react-form';
+import * as Switch from '@radix-ui/react-switch';
 import { useNavigate } from 'react-router-dom';
 
 import { Button } from '../../components/Button/Button';
@@ -14,9 +15,10 @@ export function RegComponent({ onSuccess }: RegComponentProps) {
   const [step, setStep] = useState<'initial' | 'confirm'>('initial');
   const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
+  const [role, setRole] = useState<'volunteer' | 'organization'>('volunteer');
 
-  const handleJoinOrg = () => {
-    alert('Join as an organization clicked');
+  const handleRoleToggle = () => {
+    setRole((prev) => (prev === 'volunteer' ? 'organization' : 'volunteer'))
   };
 
   // Обработчик первой формы
@@ -34,7 +36,7 @@ export function RegComponent({ onSuccess }: RegComponentProps) {
       email: formData.get('email') as string,
       username: formData.get('username') as string,
       password: formData.get('password') as string,
-      role: 'volunteer',
+      role: role,
     };
 
     try {
@@ -150,15 +152,25 @@ export function RegComponent({ onSuccess }: RegComponentProps) {
             />
 
             {/* Join org */}
-            <div className="mt-4">
-              <button
-                type="button"
-                onClick={handleJoinOrg}
-                className="text-link body-1 hover:underline"
+            <div className="flex item-center space-x-2 mt-4">
+              <span className="text-sm text-[#9A9F17]">Register as organization</span>
+              <Switch.Root
+                checked={role === 'organization'}
+                onCheckedChange={handleRoleToggle}
+                className="w-12 h-6 bg-gray-300 rounded-full relative data-[state=checked]:bg-[#9A9F17] transition-colors"
               >
-                Join as an organization
-              </button>
+                <Switch.Thumb className="block w-5 h-5 bg-white rounded-full shadow-sm translate-x-1 data-[state=checked]:translate-x-6 transition-transform" />
+              </Switch.Root>
             </div>
+            {/*<div className="mt-4">*/}
+            {/*  <button*/}
+            {/*    type="button"*/}
+            {/*    onClick={handleJoinOrg}*/}
+            {/*    className="text-link body-1 hover:underline"*/}
+            {/*  >*/}
+            {/*    Join as an organization*/}
+            {/*  </button>*/}
+            {/*</div>*/}
           </form>
         </Form.Root>
       )}
