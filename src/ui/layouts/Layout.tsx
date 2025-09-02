@@ -38,7 +38,7 @@ export function Layout({ children }: LayoutProps) {
       )}
 
       {/* Main content */}
-      <main className="flex-1 container mx-auto py-6 z-[1]">{children}</main>
+      <main className="flex-1 w-full z-[1] lg:container lg:mx-auto">{children}</main>
 
       {/* Footer условно */}
       {showFooter && (

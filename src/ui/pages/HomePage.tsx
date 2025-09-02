@@ -21,15 +21,16 @@ export function HomePage() {
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search"
-                  className="w-full border border-card-bg rounded-lg px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-active h-[58px]"
+                  className="w-full rounded-lg px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-active h-[58px]"
                 />
                 {search && (
                   <button
+                    aria-label="Cleat search"
                     type="button"
                     onClick={handleClear}
-                    className="absolute inset-y-0 right-3 flex items-center text-icons"
+                    className="absolute inset-y-0 right-3 cursor-pointer flex transition-opacity duration-150 items-center text-icons"
                   >
-                    <Icon icon="mdi:close" width={16} height={16} />
+                    <Icon icon="mdi:close" width={18} height={18} />
                   </button>
                 )}
               </div>
@@ -38,7 +39,7 @@ export function HomePage() {
         </Form.Root>
       </div>
       {/* Map */}
-      <div className="flex-1">
+      <div className="flex-1 w-full">
         <MapView />
       </div>
     </div>

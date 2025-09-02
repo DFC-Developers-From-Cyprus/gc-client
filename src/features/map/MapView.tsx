@@ -40,7 +40,7 @@ export const MapView = () => {
         <DashboardButton />
       </div>
       {/* Add polluted area */}
-      <div className="absolute bottom-10 left-4 h-10 z-[1000]">
+      <div className="absolute top-150 left-4 h-10 z-[1000]">
         <CreateReportButton />
       </div>
     </div>
