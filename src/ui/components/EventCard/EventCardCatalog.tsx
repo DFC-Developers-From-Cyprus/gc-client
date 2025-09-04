@@ -2,7 +2,7 @@ import { Icon } from '@iconify/react';
 import { useNavigate } from 'react-router-dom';
 
 export interface EventCardCatalogProps {
-  id: string;
+  uuid: string;
   imageSrc: string;
   title: string;
   organisation: string;
@@ -11,7 +11,7 @@ export interface EventCardCatalogProps {
 }
 
 export function EventCardCatalog({
-  id,
+  uuid,
   imageSrc,
   title,
   organisation,
