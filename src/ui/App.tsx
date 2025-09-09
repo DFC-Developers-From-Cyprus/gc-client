@@ -37,6 +37,7 @@ export function App() {
                 <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/dashboard/event/:uuid" element={<EventPage />} />
                 <Route path="/organization/:uuid" element={<OrganizationPage />} />
+                <Route path="/project/:uuid" element={<ProfilePage />} />
                 {/* здесь можно добавить другие защищённые маршруты */}
                 <Route path="/create_report" element={<CreateReportPage />} />
                 <Route path="/status" element={<FormStatusPage />} />

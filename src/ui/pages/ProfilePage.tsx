@@ -1,15 +1,49 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { Button } from '../components/Button/Button';
-import { EventsList } from '../components/EventCard/EventsList';
-import { mockEvents } from '../../data/mockEvents';
+// import { EventsList } from '../components/EventCard/EventsList';
+
+import { ProjectsList } from '@/ui/components/Project/ProjectsList';
+import { fetchProjects, Project, ProjectStatusEnum } from '@/api/projects';
+import { RootState } from '@/core/store/store';
 
 export function ProfilePage() {
   // 'inprogress' означает, что InProgress активна (index=1), Passed — неактивна (index=3)
   // 'passed'  — наоборот: Passed активна (index=1), InProgress — неактивна (index=3)
   const [selected, setSelected] = useState<'inprogress' | 'passed'>('inprogress');
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const filtered = mockEvents.filter((ev) => (selected === 'inprogress' ? !ev.passed : ev.passed));
+  const userUuid = useSelector((state: RootState) => state.auth.user?.uuid);
+
+  useEffect(() => {
+    const loadProjects = async () => {
+      try {
+        const data = await fetchProjects();
+        const userProjects = (data.results as Project[]).filter(
+          (project) => project.created_by === userUuid,
+        );
+        console.log(projects);
+        setProjects(userProjects);
+      } catch (err) {
+        console.error('Failed to fetch projects', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    if (userUuid) {
+      loadProjects();
+    }
+  }, [userUuid]);
+  // const filtered = mockEvents.filter((ev) => (selected === 'inprogress' ? !ev.passed : ev.passed));
+
+  const filtered = projects.filter((project) =>
+    selected === 'inprogress'
+      ? project.status !== ProjectStatusEnum.COMPLETED
+      : project.status === ProjectStatusEnum.COMPLETED,
+  );
+  if (loading) return <div className="flex flex-col pt-4 p-4">Loading...</div>;
 
   return (
     <div className="flex flex-col items-center px-[19px] pt-4">
@@ -46,7 +80,7 @@ export function ProfilePage() {
           onClick={() => setSelected('passed')}
         />
       </div>
-      <EventsList events={filtered} />
+      <ProjectsList projects={filtered} />
     </div>
   );
 }
