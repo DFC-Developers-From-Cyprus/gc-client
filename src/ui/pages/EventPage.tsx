@@ -1,30 +1,30 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 import { EventCardFull } from '../components/EventCard/EventCardFull';
 import { Button } from '../components/Button/Button';
 
-import { mockEvents, mockOrganisations } from '@/data/mockEvents';
+import { mockEvents } from '@/data/mockEvents';
 
 export function EventPage() {
-  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const event = mockEvents.find((e) => e.id === id);
+  const event = mockEvents.find((e) => e.uuid === uuid);
   if (!event) return <div className="p-4">Event not found</div>;
 
-  const org = mockOrganisations.find((o) => o.id === event.organisationId)!;
+  // const org = mockOrganisations.find((o) => o.id === event.organisationId)!;
 
   return (
     <div className="flex flex-col p-4 space-y-6">
-      <h2 className="heading-2">{event.title}</h2>
+      <h2 className="heading-2">{organization.username}</h2>
 
       <EventCardFull
         imageSrc={event.imageSrc}
-        title={event.title}
-        text={event.text}
-        organisationId={org.id}
-        organisationName={org.name}
-        description={event.description}
-        alt={event.title}
+        // title={event.title}
+        // text={event.text}
+        organisationId={organization.uuid}
+        organisationName={organization.username}
+        // description={event.description}
+        // alt={event.title}
       />
 
       {/* Кнопки внизу */}

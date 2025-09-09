@@ -7,12 +7,7 @@ export interface EventCardSearchProps {
   alt?: string;
 }
 
-export function EventCardSearch({
-  imageSrc,
-  title,
-  description,
-  alt = title,
-}: EventCardSearchProps) {
+export function OrganizationCardSearch({ uuid, username, email }: EventCardSearchProps) {
   return (
     <div className="bg-white rounded-lg shadow p-4 w-full max-w-sm flex items-start space-x-4">
       {/* небольшой квадрат изображения */}

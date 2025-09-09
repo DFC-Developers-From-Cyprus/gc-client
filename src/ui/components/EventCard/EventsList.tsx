@@ -7,7 +7,7 @@ export interface EventItem {
   description: string;
   imageSrc: string;
   passed: boolean;
-  username: string;
+  organisation: string;
 }
 
 interface EventsListProps {
@@ -20,10 +20,10 @@ export function EventsList({ events }: EventsListProps) {
       {events.map((e) => (
         <EventCardCatalog
           key={e.uuid}
-          id={e.uuid}
+          uuid={e.uuid}
           imageSrc={e.imageSrc}
           title={e.title}
-          organisation={e.username}
+          organisation={e.organisation}
           description={e.description}
         />
       ))}

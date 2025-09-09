@@ -36,7 +36,7 @@ export function EventCardCatalog({
           <p className="body-2 text-light">{description}</p>
           <button
             aria-label="View details"
-            onClick={() => navigate(`/dashboard/event/${id}`)}
+            onClick={() => navigate(`/dashboard/event/${uuid}`)}
             className="text-text self-end p-1 hover:bg-card-bg rounded"
           >
             <Icon icon="mdi:chevron-right" width={24} height={24} />

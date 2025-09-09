@@ -1,31 +1,20 @@
-import { EventCardCatalog } from './EventCardCatalog';
+import { OrganizationCardCatalog } from './OrganizationCardCatalog';
 
-export interface EventItem {
+export interface OrganizationItem {
   uuid: string;
-  title: string;
-  text: string;
-  description: string;
-  imageSrc: string;
-  passed: boolean;
   username: string;
+  email: string;
 }
 
-interface EventsListProps {
-  events: EventItem[];
+interface OrganizationsListProps {
+  orgs: OrganizationItem[];
 }
 
-export function EventsList({ events }: EventsListProps) {
+export function OrganizationsList({ orgs }: OrganizationsListProps) {
   return (
     <div className="w-full space-y-4">
-      {events.map((e) => (
-        <EventCardCatalog
-          key={e.uuid}
-          uuid={e.uuid}
-          imageSrc={e.imageSrc}
-          title={e.title}
-          organisation={e.username}
-          description={e.description}
-        />
+      {orgs.map((o) => (
+        <OrganizationCardCatalog key={o.uuid} uuid={o.uuid} username={o.username} email={o.email} />
       ))}
     </div>
   );

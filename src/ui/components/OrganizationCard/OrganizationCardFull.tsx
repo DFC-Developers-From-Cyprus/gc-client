@@ -1,17 +1,14 @@
 import * as AspectRatio from '@radix-ui/react-aspect-ratio';
 import { useNavigate } from 'react-router-dom';
 
-export interface EventCardFullProps {
+export interface OrganizationCardFullProps {
   imageSrc: string;
   title: string;
-  text: string;
   description: string;
-  organisationId: string;
-  organisationName: string;
   alt?: string;
 }
 
-export function EventCardFull({
+export function OrganizationCardFull({
   imageSrc,
   title,
   text,

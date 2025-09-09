@@ -35,8 +35,8 @@ export function App() {
                 <Route path="/settings" element={<SettingsPage />} />
                 <Route path="/favourite" element={<FavouritePage />} />
                 <Route path="/dashboard" element={<DashboardPage />} />
-                <Route path="/dashboard/event/:id" element={<EventPage />} />
-                <Route path="/organization/:id" element={<OrganizationPage />} />
+                <Route path="/dashboard/event/:uuid" element={<EventPage />} />
+                <Route path="/organization/:uuid" element={<OrganizationPage />} />
                 {/* здесь можно добавить другие защищённые маршруты */}
                 <Route path="/create_report" element={<CreateReportPage />} />
                 <Route path="/status" element={<FormStatusPage />} />

@@ -1,5 +1,7 @@
-import { EventsList } from '../components/EventCard/EventsList';
 import { useEffect, useState } from 'react';
+
+import { EventsList } from '../components/EventCard/EventsList';
+
 import { fetchAreas } from '@/api/areas.ts';
 
 export function DashboardPage() {
@@ -14,7 +16,7 @@ export function DashboardPage() {
       } catch (err) {
         console.error('Failed to fetch areas', err);
       }
-    }
+    };
     load();
   }, []);
   return (
