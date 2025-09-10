@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '../components/Button/Button';
 
 import { getPollutedAreaById, PollutedArea } from '@/api/polluted-areas';
+import { LocationInfoCard } from '@/ui/components/Area/LocationInfoCard';
 
 export function LocationInfoPage() {
   const { uuid } = useParams<{ uuid: string }>();
@@ -18,7 +19,6 @@ export function LocationInfoPage() {
     const fetchData = async () => {
       try {
         const area = await getPollutedAreaById(uuid);
-        console.log(area);
         setArea(area);
       } catch (err) {
         console.error('Error loading area', err);
@@ -44,9 +44,5 @@ export function LocationInfoPage() {
     );
   }
 
-  return (
-    <div className="flex flex-col p-4 space-y-6">
-      <p>{area.location}</p>
-    </div>
-  );
+  return <LocationInfoCard area={area} />;
 }
