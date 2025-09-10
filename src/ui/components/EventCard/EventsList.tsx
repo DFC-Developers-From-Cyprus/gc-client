@@ -2,12 +2,11 @@ import { EventCardCatalog } from './EventCardCatalog';
 
 export interface EventItem {
   uuid: string;
-  title: string;
-  text: string;
+  location: string;
   description: string;
-  imageSrc: string;
-  passed: boolean;
-  organisation: string;
+  project_uuid: string;
+  type_of_pollution: string;
+  pollution_level: number;
 }
 
 interface EventsListProps {
@@ -21,7 +20,7 @@ export function EventsList({ events }: EventsListProps) {
         <EventCardCatalog
           key={e.uuid}
           uuid={e.uuid}
-          imageSrc={e.imageSrc}
+          location={e.location}
           title={e.title}
           organisation={e.organisation}
           description={e.description}

@@ -6,10 +6,6 @@ interface ProjectsListProps {
   projects: Project[];
 }
 
-interface ProjectsListProps {
-  projects: Project[];
-}
-
 export function ProjectsList({ projects }: ProjectsListProps) {
   if (!projects?.length) {
     return <div className="text-center text-gray-400 pt-4">No projects found</div>;

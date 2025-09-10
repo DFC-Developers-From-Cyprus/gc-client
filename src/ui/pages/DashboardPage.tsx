@@ -1,27 +1,30 @@
 import { useEffect, useState } from 'react';
 
-import { EventsList } from '../components/EventCard/EventsList';
-
-import { fetchAreas } from '@/api/areas.ts';
+import { fetchAreas, PollutedArea } from '@/api/polluted-areas';
+import { AreasList } from '@/ui/components/Area/AreasList';
 
 export function DashboardPage() {
-  const [areas, setAreas] = useState([]);
+  const [areas, setAreas] = useState<PollutedArea[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const load = async () => {
+    const loadAreas = async () => {
       try {
         const data = await fetchAreas();
-        console.log(data.results);
         setAreas(data.results);
       } catch (err) {
         console.error('Failed to fetch areas', err);
+      } finally {
+        setLoading(false);
       }
     };
-    load();
+    loadAreas();
   }, []);
+
+  if (loading) return <div className="flex flex-col pt-4 p-4">Loading...</div>;
   return (
     <div className="flex flex-col p-4">
-      <EventsList events={areas} />
+      <AreasList areas={areas} />
     </div>
   );
 }

@@ -1,8 +1,8 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import { OrganizationCard } from '../components/organizationPage/OrganizationCard';
-// import { EventsListMini } from '../components/organizationPage/EventListMini';
+import { OrganizationCard } from '../components/OrganizationPage/OrganizationCard';
+// import { EventsListMini } from '../components/OrganizationPage/EventListMini';
 import { Button } from '../components/Button/Button';
 
 import { getOrganizationById } from '@/api/organizations';

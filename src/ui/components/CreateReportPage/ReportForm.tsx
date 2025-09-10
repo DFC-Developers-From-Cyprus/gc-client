@@ -8,7 +8,7 @@ import { store } from '@/core/store/store';
 
 import { createReport } from '@/api/report';
 import { Button } from '@/ui/components/Button/Button';
-import { createPolllutedArea } from '@/api/polluted-area';
+import { createPolllutedArea } from '@/api/polluted-areas';
 import { FormStatusPage } from '@/ui/pages/FormStatusPage';
 
 export function ReportForm() {
