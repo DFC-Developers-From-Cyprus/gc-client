@@ -14,7 +14,7 @@ export function OrganizationCardCatalog({ uuid, username, email }: OrganizationC
     <div className="bg-white rounded-xl shadow p-4 w-full flex items-start space-x-4">
       {/* картинка */}
       <div className="w-40 h-28 rounded bg-card-bg overflow-hidden flex-shrink-0">
-        <img alt="Image must be here" className="object-cover w-full h-full" />
+        <img alt="Image here" className="object-cover w-full h-full" />
       </div>
 
       <div className="flex-1 flex flex-col justify-between">

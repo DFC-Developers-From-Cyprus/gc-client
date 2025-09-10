@@ -3,17 +3,29 @@ import React, { useState, useEffect } from 'react';
 import * as Form from '@radix-ui/react-form';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { store } from '@/core/store/store';
+
+import { SuccessComponent } from '../components/SuccessComponent/SuccessComponent';
+import { Button } from '../components/Button/Button';
+
+import { RootState } from '@/core/store/store';
 import { updateProfile } from '@/api/profile';
 
-import { Button } from '../components/Button/Button';
-import { SuccessComponent } from '../components/SuccessComponent/SuccessComponent';
-
 export function SettingsPage() {
-  const { uuid } = useSelector((state: store) => state.auth.user)
   const navigate = useNavigate();
   const [showSuccess, setShowSuccess] = useState(false);
+  const { user, isAuth } = useSelector((state: RootState) => state.auth);
 
+  // Редирект на /profile через 5 секунд после успеха
+  useEffect(() => {
+    if (showSuccess) {
+      const timer = setTimeout(() => navigate('/profile'), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [showSuccess, navigate]);
+  if (!isAuth || !user) {
+    return <div>You need to be logged in</div>;
+  }
+  const uuid = user.uuid;
   // Обработчик сабмита формы
   const handleConfirm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,28 +36,20 @@ export function SettingsPage() {
     const payload = {
       username: formData.get('name') as string,
       email: formData.get('email') as string,
-      role: "volunteer"
+      role: 'volunteer',
       // password: formData.get('password') as string,
     };
     console.log(payload);
 
     try {
-      if( uuid ) {
-        await updateProfile( uuid, payload);
+      if (uuid) {
+        await updateProfile(uuid, payload);
         setShowSuccess(true);
       }
     } catch (err) {
       console.error('Profile update failed: ', err);
     }
   };
-
-  // Редирект на /profile через 5 секунд после успеха
-  useEffect(() => {
-    if (showSuccess) {
-      const timer = setTimeout(() => navigate('/profile'), 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [showSuccess, navigate]);
 
   const handleLogout = () => {
     // TODO: perform logout
