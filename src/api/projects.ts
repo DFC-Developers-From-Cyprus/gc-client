@@ -24,3 +24,9 @@ export const fetchProjects = async () => {
   const res = await api.get('/api/env/projects/');
   return res.data;
 };
+
+// проект по uuid
+export async function getProjectById(uuid: string) {
+  const res = await api.get(`/api/env/project/${uuid}/`);
+  return res.data;
+}

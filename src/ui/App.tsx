@@ -10,6 +10,7 @@ import { SettingsPage } from './pages/SettingsPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { EventPage } from './pages/EventPage';
 import { OrganizationPage } from './pages/OrganizationPage';
+import { ProjectPage } from './pages/ProjectPage';
 
 import { CreateReportPage } from '@/ui/pages/CreateReportPage';
 import { FavouritePage } from '@/ui/pages/FavouritePage';
@@ -37,7 +38,7 @@ export function App() {
                 <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/dashboard/event/:uuid" element={<EventPage />} />
                 <Route path="/organization/:uuid" element={<OrganizationPage />} />
-                <Route path="/project/:uuid" element={<ProfilePage />} />
+                <Route path="/project/:uuid" element={<ProjectPage />} />
                 {/* здесь можно добавить другие защищённые маршруты */}
                 <Route path="/create_report" element={<CreateReportPage />} />
                 <Route path="/status" element={<FormStatusPage />} />

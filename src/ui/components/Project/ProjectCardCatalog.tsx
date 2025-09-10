@@ -8,7 +8,7 @@ interface ProjectCardProps {
   status: string;
 }
 
-export function ProjectCardCatalog({ uuid, title, description }: ProjectCardProps) {
+export function ProjectCardCatalog({ uuid, title, description, status }: ProjectCardProps) {
   const navigate = useNavigate();
 
   return (
@@ -21,6 +21,7 @@ export function ProjectCardCatalog({ uuid, title, description }: ProjectCardProp
       <div className="flex-1 flex flex-col justify-between">
         <h3 className="text-lg font-semibold">{title}</h3>
         <p className="text-sm text-gray-500">{description}</p>
+        <p className="text-sm text-gray-500">{status}</p>
       </div>
 
       <div className="flex justify-end mt-4">
