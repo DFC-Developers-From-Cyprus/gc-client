@@ -2,25 +2,17 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { Layout } from './layouts/Layout';
 import { StartPage } from './pages/StartPage';
-import { HomePage } from './pages/HomePage';
 import { RegisterPage } from './pages/RegisterPage';
 import { ForgotPage } from './pages/ForgotPage';
-import { ProfilePage } from './pages/ProfilePage';
-import { SettingsPage } from './pages/SettingsPage';
-import { DashboardPage } from './pages/DashboardPage';
-import { EventPage } from './pages/EventPage';
-import { OrganizationPage } from './pages/OrganizationPage';
-import { ProjectPage } from './pages/ProjectPage';
 
-import { CreateReportPage } from '@/ui/pages/CreateReportPage';
-import { FavouritePage } from '@/ui/pages/FavouritePage';
-import { FormStatusPage } from '@/ui/pages/FormStatusPage';
+import { ProtectedRoute } from '@/ui/routes/ProtectedRoute';
+import { protectedRoutes, publicRoutes } from '@/ui/routes/routesConfig';
 
 export function App() {
   return (
     <Router>
       <Routes>
-        {/* Стартовая страница без Header/Footer */}
+        {/* Стартовые / публичные страницы без Layout */}
         <Route path="/" element={<StartPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/reset" element={<ForgotPage />} />
@@ -31,17 +23,19 @@ export function App() {
           element={
             <Layout>
               <Routes>
-                <Route path="/home" element={<HomePage />} />
-                <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/settings" element={<SettingsPage />} />
-                <Route path="/favourite" element={<FavouritePage />} />
-                <Route path="/dashboard" element={<DashboardPage />} />
-                <Route path="/dashboard/event/:uuid" element={<EventPage />} />
-                <Route path="/organization/:uuid" element={<OrganizationPage />} />
-                <Route path="/project/:uuid" element={<ProjectPage />} />
-                {/* здесь можно добавить другие защищённые маршруты */}
-                <Route path="/create_report" element={<CreateReportPage />} />
-                <Route path="/status" element={<FormStatusPage />} />
+                {/* Приватные */}
+                {protectedRoutes.map(({ path, element }) => (
+                  <Route
+                    key={path}
+                    path={path}
+                    element={<ProtectedRoute>{element}</ProtectedRoute>}
+                  />
+                ))}
+
+                {/* Публичные */}
+                {publicRoutes.map(({ path, element }) => (
+                  <Route key={path} path={path} element={element} />
+                ))}
               </Routes>
             </Layout>
           }
