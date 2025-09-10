@@ -1,20 +1,25 @@
 import * as Form from '@radix-ui/react-form';
 import * as Checkbox from '@radix-ui/react-checkbox';
 import { CheckIcon } from '@radix-ui/react-icons';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { store } from '@/core/store/store';
 
+import { RootState } from '@/core/store/store';
 import { createReport } from '@/api/report';
 import { Button } from '@/ui/components/Button/Button';
-import { createPolllutedArea } from '@/api/polluted-areas';
+import { createPollutedArea } from '@/api/polluted-areas';
 import { FormStatusPage } from '@/ui/pages/FormStatusPage';
 
 export function ReportForm() {
-  const { uuid } = useSelector((state: store) => state.auth.user)
+  const { user, isAuth } = useSelector((state: RootState) => state.auth);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+
+  if (!isAuth || !user) {
+    return <div>You need to be logged in</div>;
+  }
+  const uuid = user.uuid;
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -43,7 +48,6 @@ export function ReportForm() {
       // Create report
       const reportRes = await createReport(reportPayload);
       const uuid = reportRes.data.uuid;
-      console.log('Report created: ', reportRes.data);
 
       // if uuid - send to /polluted-area
       const pollutedPayload = {
@@ -54,8 +58,9 @@ export function ReportForm() {
         location: reportPayload.location,
       };
 
-      await createPolllutedArea(pollutedPayload);
-      navigate('/home');
+      const areaRes = await createPollutedArea(pollutedPayload);
+      const areaUuid = areaRes.data.uuid;
+      navigate(`/location_info/${areaUuid}`);
     } catch (error) {
       console.error('Failed to create report.', error);
     } finally {

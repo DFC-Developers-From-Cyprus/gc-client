@@ -3,13 +3,13 @@ import { useEffect, useState } from 'react';
 
 import { Button } from '../components/Button/Button';
 
-import { getPollutedAreaById, PollutedAreaPayload } from '@/api/polluted-areas';
+import { getPollutedAreaById, PollutedArea } from '@/api/polluted-areas';
 
 export function LocationInfoPage() {
   const { uuid } = useParams<{ uuid: string }>();
   const navigate = useNavigate();
 
-  const [area, setArea] = useState<PollutedAreaPayload | null>(null);
+  const [area, setArea] = useState<PollutedArea | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

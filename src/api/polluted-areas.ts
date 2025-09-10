@@ -9,8 +9,10 @@ export interface PollutedArea {
   location: string;
 }
 
+export type PollutedAreaPayload = Omit<PollutedArea, 'uuid'>;
+
 // создать загрязненный участок
-export const createPolllutedArea = (data: PollutedArea) => {
+export const createPollutedArea = (data: PollutedAreaPayload) => {
   return api.post('api/env/polluted-area/', data);
 };
 
