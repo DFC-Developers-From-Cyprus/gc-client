@@ -13,7 +13,7 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
   const location = useLocation();
 
   if (!isAuth) {
-    // редирект на стартовую или логин
+    // редирект на стартовую
     return (
       <Navigate
         to="/"
@@ -25,6 +25,5 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
       />
     );
   }
-
   return <>{children}</>;
 }
