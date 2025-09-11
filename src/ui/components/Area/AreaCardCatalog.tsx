@@ -18,11 +18,11 @@ export function AreaCardCatalog({ uuid, description, location }: AreaCardProps) 
       </div>
 
       <div className="flex-1 flex flex-col justify-between">
-        <h3 className="text-sm text-gray-500">{location}</h3>
+        <h3 className="text-sm text-gray-500 truncate w-40">{location}</h3>
         <p className="text-sm text-gray-500">{description}</p>
       </div>
 
-      <div className="flex justify-end mt-4">
+      <div className="flex justify-end mt-auto">
         <button
           aria-label="View details"
           onClick={() => navigate(`/location_info/${uuid}`)}

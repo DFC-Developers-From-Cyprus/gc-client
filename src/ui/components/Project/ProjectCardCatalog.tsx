@@ -27,7 +27,7 @@ export function ProjectCardCatalog({ uuid, title, description, status }: Project
       <div className="flex justify-end mt-4">
         <button
           aria-label="View details"
-          onClick={() => navigate(`/location_info/${uuid}`)}
+          onClick={() => navigate(`/project/${uuid}`)}
           className="text-text self-end p-1 hover:bg-card-bg rounded"
         >
           <Icon icon="mdi:chevron-right" width={24} height={24} />
