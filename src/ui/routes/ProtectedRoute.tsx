@@ -20,7 +20,7 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
         replace
         state={{
           from: location.pathname,
-          message: 'Вы должны войти, чтобы получить доступ к этой странице.',
+          message: 'You need to login',
         }}
       />
     );
