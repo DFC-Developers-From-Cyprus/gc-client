@@ -1,18 +1,39 @@
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { LatLngExpression } from 'leaflet';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { ZoomControls } from '@/features/map/ZoomControls';
 import { DashboardButton } from '@/features/map/DashboardButton';
 import { CreateReportButton } from '@/features/map/CreateReportButton';
 import { UserLocation } from '@/features/map/UserLocation';
+import { PollutedAreaMarker } from '@/features/map/PollutedAreaMarker';
+import { fetchAreas, PollutedArea } from '@/api/polluted-areas';
 
 // Центр карты (Кипр)
 const center: LatLngExpression = [35.1856, 33.3823];
 
 export const MapView = () => {
   const [showLocation, setShowLocation] = useState(false);
+  const [areas, setAreas] = useState<PollutedArea[]>([]);
+
+  useEffect(() => {
+    const loadAreas = async () => {
+      try {
+        let url: string | null = '/api/env/polluted-areas/';
+        let allResults: PollutedArea[] = [];
+        while (url) {
+          const data = await fetchAreas(url);
+          allResults = [...allResults, ...data.results];
+          url = data.next; // если есть следующая страница
+        }
+        setAreas(allResults);
+      } catch (err) {
+        console.error('Failed to fetch areas', err);
+      }
+    };
+    loadAreas();
+  }, []);
 
   return (
     <div className="relative w-full h-full">
@@ -21,6 +42,9 @@ export const MapView = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; OpenStreetMap contributors"
         />
+        {areas.map((area) => (
+          <PollutedAreaMarker key={area.uuid} area={area} />
+        ))}
         <UserLocation enabled={showLocation} />
         <ZoomControls />
         {/*  */}

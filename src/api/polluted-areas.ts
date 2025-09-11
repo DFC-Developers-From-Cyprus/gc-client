@@ -23,7 +23,14 @@ export async function getPollutedAreaById(uuid: string) {
 }
 
 // список загрязненных участков
-export const fetchAreas = async () => {
-  const res = await api.get('/api/env/polluted-areas/');
+export const fetchAreas = async (url = '/api/env/polluted-areas/') => {
+  if (url.startsWith('http://')) {
+    url = url.replace('http://', 'https://');
+  }
+  if (url.startsWith('https://greency.org')) {
+    url = url.replace('https://greency.org', '');
+  }
+
+  const res = await api.get(url);
   return res.data;
 };
