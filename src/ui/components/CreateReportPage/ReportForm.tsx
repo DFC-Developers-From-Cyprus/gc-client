@@ -10,6 +10,7 @@ import { createReport } from '@/api/report';
 import { Button } from '@/ui/components/Button/Button';
 import { createPollutedArea } from '@/api/polluted-areas';
 import { FormStatusPage } from '@/ui/pages/FormStatusPage';
+import { MapModal } from '@/ui/components/CreateReportPage/MapModal';
 
 const POLLUTION_TYPES = [
   { value: 'soil', label: 'Soil' },
@@ -22,6 +23,7 @@ export function ReportForm() {
   const { user, isAuth } = useSelector((state: RootState) => state.auth);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [isMapOpen, setIsMapOpen] = useState(false);
 
   if (!isAuth || !user) {
     return <div>You need to be logged in</div>;
@@ -105,9 +107,13 @@ export function ReportForm() {
       <Form.Field name="location" className="grid gap-1 relative">
         <Form.Control asChild>
           <input
-            required
             type="text"
+            id="location"
+            name="location"
             placeholder="Location"
+            required
+            readOnly
+            onClick={() => setIsMapOpen(true)}
             className="w-full border border-gray-300 rounded-lg px-4 py-4 focus:outline-none focus:ring-2 focus:ring-[#4F6A35] placeholder-black"
           />
         </Form.Control>
@@ -216,6 +222,15 @@ export function ReportForm() {
           />
         </div>
       </Form.Submit>
+
+      <MapModal
+        isOpen={isMapOpen}
+        onClose={() => setIsMapOpen(false)}
+        onSelect={(coords) => {
+          const input = document.getElementById('location') as HTMLInputElement;
+          if (input) input.value = `${coords[0]},${coords[1]}`;
+        }}
+      />
     </Form.Root>
   );
 }
