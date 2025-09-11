@@ -11,6 +11,13 @@ import { Button } from '@/ui/components/Button/Button';
 import { createPollutedArea } from '@/api/polluted-areas';
 import { FormStatusPage } from '@/ui/pages/FormStatusPage';
 
+const POLLUTION_TYPES = [
+  { value: 'soil', label: 'Soil' },
+  { value: 'water', label: 'Water' },
+  { value: 'waste', label: 'Garbage' },
+  { value: 'other', label: 'Other' },
+];
+
 export function ReportForm() {
   const { user, isAuth } = useSelector((state: RootState) => state.auth);
   const navigate = useNavigate();
@@ -115,18 +122,22 @@ export function ReportForm() {
       <Form.Field name="type" className="grid gap-1 px-4 py-4 border border-gray-300 rounded-lg">
         <Form.Label className="text-l font-medium">Type of pollution</Form.Label>
         <div className="flex flex-col gap-3">
-          {['Soil', 'Water', 'Garbage', 'Other'].map((type) => (
-            <label key={type} className="flex items-center gap-2">
-              <Checkbox.Root className="w-5 h-5 border border-gray-400 rounded flex items-center justify-center data-[state=checked]:bg-[#4F6A35]">
+          {POLLUTION_TYPES.map(({ value, label }) => (
+            <label key={value} className="flex items-center gap-2">
+              <Checkbox.Root
+                name="type"
+                value={value}
+                className="w-5 h-5 border border-gray-400 rounded flex items-center justify-center data-[state=checked]:bg-[#4F6A35]"
+              >
                 <Checkbox.Indicator>
                   <CheckIcon className="text-white w-4 h-4" />
                 </Checkbox.Indicator>
               </Checkbox.Root>
-              <span className="text-sm text-gray-700">{type}</span>
+              <span className="text-sm text-gray-700">{label}</span>
             </label>
           ))}
 
-          {/* Поле для Other — всегда видно */}
+          {/* Поле для Other */}
           <Form.Control asChild>
             <input
               type="text"

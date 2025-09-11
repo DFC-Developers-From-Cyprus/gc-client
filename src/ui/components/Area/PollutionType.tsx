@@ -9,7 +9,7 @@ interface PollutionTypeProps {
 
 const typeIcons: Record<string, string> = {
   water: waterIcon,
-  garbage: garbageIcon,
+  waste: garbageIcon,
   soil: soilIcon,
   other: otherIcon,
 };
@@ -24,10 +24,7 @@ export function PollutionType({ types }: PollutionTypeProps) {
       <p className="mb-2">Type</p>
       <div className="flex space-x-1">
         {parsedTypes.map((type) => (
-          <div
-            key={type}
-            className="w-8 h-8 flex items-center justify-center fullbg-white"
-          >
+          <div key={type} className="w-8 h-8 flex items-center justify-center fullbg-white">
             <img src={typeIcons[type] || otherIcon} alt={type} className="w-8 h-8 object-contain" />
           </div>
         ))}
