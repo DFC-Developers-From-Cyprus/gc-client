@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Button } from '../components/Button/Button';
-// import { EventsList } from '../components/EventCard/EventsList';
 
 import { ProjectsList } from '@/ui/components/Project/ProjectsList';
 import { fetchProjects, Project, ProjectStatusEnum } from '@/api/projects';
@@ -20,11 +19,18 @@ export function ProfilePage() {
   useEffect(() => {
     const loadProjects = async () => {
       try {
-        const data = await fetchProjects();
-        const userProjects = (data.results as Project[]).filter(
-          (project) => project.created_by === userUuid,
-        );
-        console.log(projects);
+        let url: string | null = '/api/env/projects/';
+        let allResults: Project[] = [];
+
+        while (url) {
+          const data = await fetchProjects(url);
+          allResults = [...allResults, ...data.results];
+          url = data.next; // берём ссылку на следующую страницу
+        }
+
+        // фильтруем только проекты этого пользователя
+        const userProjects = allResults.filter((project) => project.created_by === userUuid);
+
         setProjects(userProjects);
       } catch (err) {
         console.error('Failed to fetch projects', err);
@@ -36,7 +42,6 @@ export function ProfilePage() {
       loadProjects();
     }
   }, [userUuid]);
-  // const filtered = mockEvents.filter((ev) => (selected === 'inprogress' ? !ev.passed : ev.passed));
 
   const filtered = projects.filter((project) =>
     selected === 'inprogress'

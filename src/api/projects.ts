@@ -20,8 +20,11 @@ export interface Project {
 }
 
 // список проектов
-export const fetchProjects = async () => {
-  const res = await api.get('/api/env/projects/');
+export const fetchProjects = async (url = '/api/env/projects/') => {
+  if (url.startsWith('http://')) {
+    url = url.replace('http://', 'https://');
+  }
+  const res = await api.get(url);
   return res.data;
 };
 

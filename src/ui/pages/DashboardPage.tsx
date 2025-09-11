@@ -10,8 +10,16 @@ export function DashboardPage() {
   useEffect(() => {
     const loadAreas = async () => {
       try {
-        const data = await fetchAreas();
-        setAreas(data.results);
+        let url: string | null = '/api/env/polluted-areas/';
+        let allResults: PollutedArea[] = [];
+
+        while (url) {
+          const data = await fetchAreas(url);
+          allResults = [...allResults, ...data.results];
+          url = data.next; // если есть следующая страница
+        }
+
+        setAreas(allResults);
       } catch (err) {
         console.error('Failed to fetch areas', err);
       } finally {
